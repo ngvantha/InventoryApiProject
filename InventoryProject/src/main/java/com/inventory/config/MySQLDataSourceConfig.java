@@ -25,13 +25,11 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
 import jakarta.persistence.EntityManagerFactory;
 
-
-
 @Configuration
-@EnableJpaRepositories(basePackages = {Constants.PACKAGE_DB1_REPOSITORIES}, entityManagerFactoryRef = Constants.ENTITY_MANAGER_FACTORY_1, transactionManagerRef = Constants.TRANSACTION_MANAGER_1)
+@EnableJpaRepositories(basePackages = {
+		Constants.PACKAGE_DB1_REPOSITORIES }, entityManagerFactoryRef = Constants.ENTITY_MANAGER_FACTORY_1, transactionManagerRef = Constants.TRANSACTION_MANAGER_1)
 @EnableTransactionManagement
 public class MySQLDataSourceConfig {
 	@Primary
@@ -76,6 +74,6 @@ public class MySQLDataSourceConfig {
 //	}
 	@Bean
 	public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
-	   return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), new HashMap<>(), null);
+		return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), new HashMap<>(), null);
 	}
 }
