@@ -65,5 +65,5 @@ public class ProductDetailUnit implements Serializable {
 	private Unit Unit;
 	
 	@OneToMany(mappedBy="productDetailUnit")
-	private List<ProductDetailUnitInventory> productDetailUnitInventory;
+	private List<ProductDetailUnitInventory> productDetailUnitInventories;
 }

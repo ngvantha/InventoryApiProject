@@ -37,6 +37,6 @@ public class Product implements Serializable {
 	@NonNull
 	private Boolean DELETE_STATUS;
 	
-	@OneToMany(mappedBy="producdetail")
+	@OneToMany(mappedBy="product")
 	private List<ProductDetail> ProductDetailes;
 }

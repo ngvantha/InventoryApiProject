@@ -49,5 +49,5 @@ public class ProductDetail implements Serializable {
 	private Product product;
 	
 	@OneToMany(mappedBy ="productDetail")
-	private List<ProductDetailUnit> productDetailUnit;
+	private List<ProductDetailUnit> productDetailUnites;
 }

@@ -68,6 +68,6 @@ public class ProductDetailUnitInventory implements Serializable {
 	private Boolean PRODUCT_DETAIL_BARCODE;
 	
 	@ManyToOne
-	@JoinColumn(name="PRODUCT_DETAIL_UNIT_INVENTORIE_ID")
+	@JoinColumn(name="PRODUCT_DETAIL_UNIT_ID")
 	private ProductDetailUnit productDetailUnit;
 }

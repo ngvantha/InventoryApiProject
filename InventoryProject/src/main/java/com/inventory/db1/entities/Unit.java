@@ -38,5 +38,5 @@ public class Unit implements Serializable {
 	private Boolean DELETE_STATUS;
 	
 	@OneToMany(mappedBy ="Unit")
-	private List<ProductDetailUnit> productDetailUnit;
+	private List<ProductDetailUnit> productDetailUnites;
 }
