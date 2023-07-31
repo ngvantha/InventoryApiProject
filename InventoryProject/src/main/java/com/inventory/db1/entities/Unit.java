@@ -22,7 +22,7 @@ public class Unit implements Serializable {
 	
 	@Column(name = "UNIT_NAME", length = 255, nullable = false, unique = true)
 	@NonNull
-	private String unitName;
+	private String name;
 	
 	@Column(name = "UNIT_DESCRIPTION", length = 255)
 	@NonNull
