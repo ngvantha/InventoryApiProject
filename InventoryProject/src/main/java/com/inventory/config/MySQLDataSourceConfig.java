@@ -45,7 +45,11 @@ public class MySQLDataSourceConfig {
 	@Bean(name = Constants.ENTITY_MANAGER_FACTORY_1)
 	public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory(EntityManagerFactoryBuilder builder,
 			@Qualifier("mysqlDataSource") DataSource dataSource) {
-		return builder.dataSource(dataSource).properties(hibernateProperties()).packages(Constants.PACKAGE_DB1_ENTITIES).persistenceUnit(Constants.JPA_CONNET_DB1_UNIT_NAME).build();
+		return builder.dataSource(dataSource)
+					  //.properties(hibernateProperties())
+					  .packages(Constants.PACKAGE_DB1_ENTITIES)
+					  .persistenceUnit(Constants.JPA_CONNET_DB1_UNIT_NAME)
+					  .build();
 	}
 
 	@Primary
@@ -55,21 +59,21 @@ public class MySQLDataSourceConfig {
 		return new JpaTransactionManager(entityManagerFactory);
 	}
 	
-	private Map<String, Object> hibernateProperties() {
-		 
-		Resource resource = new ClassPathResource("hibernate.properties");
-		
-		try {
-			Properties properties = PropertiesLoaderUtils.loadProperties(resource);
-			return properties.entrySet().stream()
-											.collect(Collectors.toMap(
-														e -> e.getKey().toString(),
-														e -> e.getValue())
-													);
-		} catch (IOException e) {
-			return new HashMap<String, Object>();
-		}
-	}
+//	private Map<String, Object> hibernateProperties() {
+//		 
+//		Resource resource = new ClassPathResource("hibernate.properties");
+//		
+//		try {
+//			Properties properties = PropertiesLoaderUtils.loadProperties(resource);
+//			return properties.entrySet().stream()
+//											.collect(Collectors.toMap(
+//														e -> e.getKey().toString(),
+//														e -> e.getValue())
+//													);
+//		} catch (IOException e) {
+//			return new HashMap<String, Object>();
+//		}
+//	}
 	@Bean
 	public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
 	   return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), new HashMap<>(), null);
