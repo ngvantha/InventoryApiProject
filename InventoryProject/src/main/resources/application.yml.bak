@@ -1,0 +1,14 @@
+# MySQL Datasource
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mysql_database
+    username: mysql_username
+    password: mysql_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+# SQL Server Datasource
+datasource2:
+  url: jdbc:sqlserver://localhost:1433;databaseName=sqlserver_database
+  username: sqlserver_username
+  password: sqlserver_password
+  driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
