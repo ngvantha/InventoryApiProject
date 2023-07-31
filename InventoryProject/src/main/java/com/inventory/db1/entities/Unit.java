@@ -5,12 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "UNITS", catalog = "WAREHOUSE")
@@ -23,20 +18,20 @@ public class Unit implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UNIT_ID")
-	private Integer UNIT_ID;
+	private Integer id;
 	
 	@Column(name = "UNIT_NAME", length = 255, nullable = false, unique = true)
 	@NonNull
-	private String UNIT_NAME;
+	private String unitName;
 	
 	@Column(name = "UNIT_DESCRIPTION", length = 255)
 	@NonNull
-	private String UNIT_DESCRIPTION;
+	private String unitDescription;
 	
 	@Column(name = "DELETE_STATUS", columnDefinition = "boolean default false")
 	@NonNull
-	private Boolean DELETE_STATUS;
+	private Boolean delStatus;
 	
 	@OneToMany(mappedBy ="Unit")
-	private List<ProductDetailUnit> productDetailUnit;
+	private List<ProductDetailUnit> productDetailUnites;
 }

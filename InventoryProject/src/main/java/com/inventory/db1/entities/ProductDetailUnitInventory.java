@@ -25,7 +25,7 @@ public class ProductDetailUnitInventory implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PRODUCT_DETAIL_UNIT_INVENTORIE_ID")
-	private Integer PRODUCT_DETAIL_UNIT_INVENTORIE_ID;
+	private Integer id;
 
 //	@Column(name = "PRODUCT_DETAIL_UNIT_ID")
 //	@NonNull
@@ -33,41 +33,41 @@ public class ProductDetailUnitInventory implements Serializable {
 
 	@Column(name = "INPUT_DATE")
 	@NonNull
-	private Date INPUT_DATE;
+	private Date inputDate;
 
 	@Column(name = "UNIT_PRICE")
 	@NonNull
-	private Double UNIT_PRICE;
+	private Double unitPrice;
 
 	@Column(name = "RETAIL_PRICE")
 	@NonNull
-	private Double RETAIL_PRICE;
+	private Double retailPrice;
 
 	@Column(name = "WHOLESALE_PRICE")
 	@NonNull
-	private Double WHOLESALE_PRICE;
+	private Double wholesalePrice;
 
 	@Column(name = "SALE_PRICE")
 	@NonNull
-	private Double SALE_PRICE;
+	private Double salePrice;
 
 	@Column(name = "INPUT_QUANTITY")
 	@NonNull
-	private Double INPUT_QUANTITY;
+	private Double inputQuantity;
 
 	@Column(name = "INVENTORY_QUANTITY")
 	@NonNull
-	private Double INVENTORY_QUANTITY;
+	private Double inventoryQuantity;
 
 	@Column(name = "IS_STATUS", columnDefinition = "boolean default true")
 	@NonNull
-	private Boolean IS_STATUS;
+	private Boolean isStatus;
 
 	@Column(name = "PRODUCT_DETAIL_BARCODE", length = 255)
 	@NonNull
-	private Boolean PRODUCT_DETAIL_BARCODE;
+	private Boolean productDetailBarcode;
 	
 	@ManyToOne
-	@JoinColumn(name="PRODUCT_DETAIL_UNIT_INVENTORIE_ID")
+	@JoinColumn(name="PRODUCT_DETAIL_UNIT_ID")
 	private ProductDetailUnit productDetailUnit;
 }

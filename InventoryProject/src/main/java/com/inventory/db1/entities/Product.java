@@ -20,23 +20,23 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PRODUCT_ID")
-	private Integer PRODUCT_ID;
+	private Integer id;
 	@Column(name = "PRODUCT_NAME", length = 255, nullable = false, unique = true)
 	@NonNull
-	private String PRODUCT_NAME;
+	private String productName;
 	@Column(name = "VIEWCOUNT")
 	@NonNull
-	private Integer VIEWCOUNT;
+	private Integer viewCount;
 	@Column(name = "SEOALIAS", length = 255)
 	@NonNull
-	private String SEOALIAS;
+	private String seoAlias;
 	@Column(name = "IS_STATUS", columnDefinition = "boolean default true")
 	@NonNull
-	private Boolean IS_STATUS;
+	private Boolean isStatus;
 	@Column(name = "DELETE_STATUS", columnDefinition = "boolean default false")
 	@NonNull
-	private Boolean DELETE_STATUS;
+	private Boolean delStatus;
 	
-	@OneToMany(mappedBy="producdetail")
+	@OneToMany(mappedBy="product")
 	private List<ProductDetail> ProductDetailes;
 }
