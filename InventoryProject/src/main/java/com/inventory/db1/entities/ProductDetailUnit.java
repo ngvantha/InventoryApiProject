@@ -26,7 +26,7 @@ public class ProductDetailUnit implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PRODUCT_DETAIL_UNIT_ID")
-	private Integer PRODUCT_DETAIL_UNIT_ID;
+	private Integer id;
 
 //	@Column(name = "PRODUCT_DETAIL_ID")
 //	@NonNull
@@ -38,23 +38,23 @@ public class ProductDetailUnit implements Serializable {
 
 	@Column(name = "IS_MAIN")
 	@NonNull
-	private Boolean IS_MAIN;
+	private Boolean isMain;
 
 	@Column(name = "CONVERSIONRATIO")
 	@NonNull
-	private Boolean CONVERSIONRATIO;
+	private Boolean conversionratio;
 
 	@Column(name = "RATIO_TYPE")
 	@NonNull
-	private Boolean RATIO_TYPE;
+	private Boolean ratioType;
 
 	@Column(name = "RATIO_TO_UNIT")
 	@NonNull
-	private Boolean RATIO_TO_UNIT;
+	private Boolean ratioToUnit;
 
 	@Column(name = "IS_STATUS", columnDefinition = "boolean default true")
 	@NonNull
-	private Boolean IS_STATUS;
+	private Boolean isStatus;
 	
 	@ManyToOne
 	@JoinColumn(name = "PRODUCT_DETAIL_ID")

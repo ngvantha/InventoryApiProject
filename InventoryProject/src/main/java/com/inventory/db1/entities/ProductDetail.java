@@ -26,7 +26,7 @@ public class ProductDetail implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PRODUCT_DETAIL_ID")
-	private Integer PRODUCT_DETAIL_ID;
+	private Integer id;
 	
 //	@Column(name = "PRODUCT_ID", nullable = false)
 //	@NonNull
@@ -34,15 +34,15 @@ public class ProductDetail implements Serializable {
 	
 	@Column(name = "PRODUCT_CODE", length = 255)
 	@NonNull
-	private String PRODUCT_CODE;
+	private String productCode;
 	
 	@Column(name = "IS_STATUS", columnDefinition = "boolean default true")
 	@NonNull
-	private Boolean IS_STATUS;
+	private Boolean isStatus;
 	
 	@Column(name = "PRODUCT_DETAIL_DESCRIPTION")
 	@NonNull
-	private String PRODUCT_DETAIL_DESCRIPTION;
+	private String productDetailDescription;
 	
 	@ManyToOne
 	@JoinColumn(name="PRODUCT_ID")
