@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
 @Table(name = "UNITS", catalog = "WAREHOUSE")
+@NoArgsConstructor
 @Data
 public class Unit implements Serializable {
 	/**
@@ -18,6 +21,7 @@ public class Unit implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UNIT_ID")
+	@NonNull
 	private Integer id;
 	
 	@Column(name = "UNIT_NAME", length = 255, nullable = false, unique = true)

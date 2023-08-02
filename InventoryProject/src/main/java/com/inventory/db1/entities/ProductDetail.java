@@ -13,10 +13,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
 @Table(name = "PRODUCT_DETAILS", catalog = "WAREHOUSE")
+@NoArgsConstructor
 @Data
 public class ProductDetail implements Serializable {
 	/**

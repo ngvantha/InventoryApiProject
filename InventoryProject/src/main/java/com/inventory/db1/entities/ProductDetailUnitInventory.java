@@ -12,10 +12,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
 @Table(name = "PRODUCT_DETAIL_UNIT_INVENTORIES", catalog = "WAREHOUSE")
+@NoArgsConstructor
 @Data
 public class ProductDetailUnitInventory implements Serializable {
 	/**
