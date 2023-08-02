@@ -5,10 +5,12 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
 @Table(name = "PRODUCTS", catalog = "WAREHOUSE")
+@NoArgsConstructor
 @Data
 public class Product implements Serializable {
 
