@@ -1,4 +1,4 @@
-package com.inventory.contrller;
+package com.inventory.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class UnitController {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<UnitResponse> getUnitId(@PathVariable(name = "id") int id) {
-		try {
+//		try {
 			// Tìm unit trong database bằng id
 	        Unit unit = service.getUnitByID(id);
 	        // Nếu không tìm thấy, trả về message lỗi 404 Not found
@@ -30,10 +30,10 @@ public class UnitController {
 	        return ResponseEntity.ok(response);
 			//return service.getUnitByID(id);
 			//return null;
-		}catch (Exception e) {
-			// TODO: handle exception
-			 return ResponseEntity.notFound().build(); 
-		} 
+//		}catch (Exception e) {
+//			// TODO: handle exception
+//			 return ResponseEntity.notFound().build(); 
+//		} 
 		
 		
 	}
