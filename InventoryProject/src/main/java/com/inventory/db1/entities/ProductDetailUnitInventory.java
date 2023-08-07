@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -34,6 +36,7 @@ public class ProductDetailUnitInventory implements Serializable {
 //	private Integer PRODUCT_DETAIL_UNIT_ID;
 
 	@Column(name = "INPUT_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
 	@NonNull
 	private Date inputDate;
 

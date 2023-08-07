@@ -5,6 +5,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -47,8 +49,9 @@ public class ProductDetailUnit implements Serializable {
 	private Boolean conversionratio;
 
 	@Column(name = "RATIO_TYPE")
+	@Enumerated(EnumType.STRING)
 	@NonNull
-	private Boolean ratioType;
+	private RatioType ratioType;
 
 	@Column(name = "RATIO_TO_UNIT")
 	@NonNull
@@ -57,15 +60,19 @@ public class ProductDetailUnit implements Serializable {
 	@Column(name = "IS_STATUS", columnDefinition = "boolean default true")
 	@NonNull
 	private Boolean isStatus;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "PRODUCT_DETAIL_ID")
 	private ProductDetail productDetail;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "UNIT_ID")
 	private Unit Unit;
-	
-	@OneToMany(mappedBy="productDetailUnit")
+
+	@OneToMany(mappedBy = "productDetailUnit")
 	private List<ProductDetailUnitInventory> productDetailUnitInventories;
+
+	public enum RatioType {
+		Default, Percent
+	}
 }
