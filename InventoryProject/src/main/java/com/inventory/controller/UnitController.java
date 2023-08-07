@@ -1,5 +1,6 @@
 package com.inventory.controller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,9 @@ import com.inventory.service.IUnitService;
 public class UnitController {
 	@Autowired
 	private IUnitService service;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<UnitResponse> getUnitId(@PathVariable(name = "id") int id) {
@@ -24,8 +28,7 @@ public class UnitController {
 		// Nếu không tìm thấy, trả về message lỗi 404 Not found
 		if (unit == null)
 			return ResponseEntity.notFound().build();
-		UnitResponse response = new UnitResponse(unit.getId(), unit.getName(), unit.getUnitDescription(),
-				unit.getDelStatus());
+		UnitResponse response = modelMapper.map(unit, UnitResponse.class);
 		// Nếu tìm thấy return 200 OK
 		return ResponseEntity.ok(response);
 	}
