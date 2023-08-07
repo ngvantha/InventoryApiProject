@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.inventory.db1.entities.Unit;
 import com.inventory.db1.repositories.IUnitRepository;
 import com.inventory.responseVM.UnitResponse;
+import com.inventory.specification.UnitSpecification;
 
 @Service
 @Transactional
@@ -81,10 +83,10 @@ public class UnitService implements IUnitService {
 		return false;
 	}
 
-	@Override
-	public Page<UnitResponse> getAllUnit(Pageable pageable) {
+	public Page<UnitResponse> getAllUnit(Pageable pageable, String search) {
 		// TODO Auto-generated method stub
-		Page<Unit> entityPages = repository.findAll(pageable);
+		Specification<Unit> where = UnitSpecification.buildWhere(search);
+		Page<Unit> entityPages = repository.findAll(where, pageable);
 		// convert entities --> dtos
 		List<UnitResponse> dtos = 
 				modelMapper.map(entityPages.getContent(), new TypeToken<List<UnitResponse>>() {}.getType());

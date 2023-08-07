@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inventory.responseVM.UnitResponse;
@@ -26,8 +27,8 @@ public class UnitController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<Page<UnitResponse>> getAllUnites(Pageable pageable) {
-		Page<UnitResponse> response = service.getAllUnit(pageable);
+	public ResponseEntity<Page<UnitResponse>> getAllUnites(Pageable pageable,@RequestParam(value = "search", required = false) String search) {
+		Page<UnitResponse> response = service.getAllUnit(pageable, search);
 		return ResponseEntity.ok(response);
 	}
 

@@ -30,6 +30,6 @@ public interface IUnitService {
 
 	public boolean isUnitExistsByName(String name);
 	
-	public Page<UnitResponse> getAllUnit(Pageable pageable);
+	public Page<UnitResponse> getAllUnit(Pageable pageable, String search);
 
 }
