@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.inventory.db1.entities.Unit;
 import com.inventory.db1.repositories.IUnitRepository;
+import com.inventory.requestVM.UnitFilterRequest;
 import com.inventory.responseVM.UnitResponse;
 import com.inventory.specification.UnitSpecification;
 
@@ -83,13 +84,13 @@ public class UnitService implements IUnitService {
 		return false;
 	}
 
-	public Page<UnitResponse> getAllUnit(Pageable pageable, String search) {
+	public Page<UnitResponse> getAllUnit(Pageable pageable, String search, UnitFilterRequest filterRequest) {
 		// TODO Auto-generated method stub
-		Specification<Unit> where = UnitSpecification.buildWhere(search);
+		Specification<Unit> where = UnitSpecification.buildWhere(search, filterRequest);
 		Page<Unit> entityPages = repository.findAll(where, pageable);
 		// convert entities --> dtos
-		List<UnitResponse> dtos = 
-				modelMapper.map(entityPages.getContent(), new TypeToken<List<UnitResponse>>() {}.getType());
+		List<UnitResponse> dtos = modelMapper.map(entityPages.getContent(), new TypeToken<List<UnitResponse>>() {
+		}.getType());
 		Page<UnitResponse> dtoPages = new PageImpl<>(dtos, pageable, entityPages.getTotalElements());
 		return dtoPages;
 	}

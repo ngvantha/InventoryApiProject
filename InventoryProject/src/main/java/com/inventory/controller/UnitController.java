@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inventory.requestVM.UnitFilterRequest;
 import com.inventory.responseVM.UnitResponse;
 import com.inventory.service.IUnitService;
 
@@ -25,10 +26,11 @@ public class UnitController {
 		UnitResponse response = service.getUnitByID(id);
 		return ResponseEntity.ok(response);
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<Page<UnitResponse>> getAllUnites(Pageable pageable,@RequestParam(value = "search", required = false) String search) {
-		Page<UnitResponse> response = service.getAllUnit(pageable, search);
+	public ResponseEntity<Page<UnitResponse>> getAllUnites(Pageable pageable,
+			@RequestParam(value = "search", required = false) String search, UnitFilterRequest filterRequest) {
+		Page<UnitResponse> response = service.getAllUnit(pageable, search, filterRequest);
 		return ResponseEntity.ok(response);
 	}
 

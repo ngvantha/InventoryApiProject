@@ -4,6 +4,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import com.inventory.db1.entities.Unit;
+import com.inventory.requestVM.UnitFilterRequest;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -14,17 +15,37 @@ import lombok.RequiredArgsConstructor;
 
 public class UnitSpecification {
 	@SuppressWarnings("deprecation")
-	public static Specification<Unit> buildWhere(String search) {
+	public static Specification<Unit> buildWhere(String search, UnitFilterRequest filterRequest) {
+Specification<Unit> where = null;
 		
-		if (StringUtils.isEmpty(search)) {
-			return null;
+		if (!StringUtils.isEmpty(search)) {
+			search = search.trim();
+			CustomSpecification name = new CustomSpecification("name", search);
+			CustomSpecification unitDescription = new CustomSpecification("unitDescription", search);
+			where = Specification.where(name).or(unitDescription);
 		}
 		
-		search = search.trim();
+		// if there is filter by min id
+		if (filterRequest != null && filterRequest.getMinId() != null) {
+			CustomSpecification minId = new CustomSpecification("minId", filterRequest.getMinId());
+			if (where == null) {
+				where = minId;
+			} else {
+				where = where.and(minId);
+			}
+		}
 		
-		CustomSpecification name = new CustomSpecification("name", search);
+		// if there is filter by max id
+		if (filterRequest != null && filterRequest.getMaxId() != null) {
+			CustomSpecification maxId = new CustomSpecification("maxId", filterRequest.getMaxId());
+			if (where == null) {
+				where = maxId;
+			} else {
+				where = where.and(maxId);
+			}
+		}
 
-		return Specification.where(name);
+		return where;
 	}
 }
 @SuppressWarnings("serial")
@@ -45,6 +66,19 @@ class CustomSpecification implements Specification<Unit> {
 		if (field.equalsIgnoreCase("name")) {
 			return criteriaBuilder.like(root.get("name"), "%" + value.toString() + "%");
 		}
+		
+		if (field.equalsIgnoreCase("minId")) {
+			return criteriaBuilder.greaterThanOrEqualTo(root.get("id"), value.toString());
+		}
+		
+		if (field.equalsIgnoreCase("maxId")) {
+			return criteriaBuilder.lessThanOrEqualTo(root.get("id"), value.toString());
+		}
+		
+		if (field.equalsIgnoreCase("unitDescription")) {
+			return criteriaBuilder.like(root.get("unitDescription"), "%" + value.toString() + "%");
+		}
+		
 
 		return null;
 	}
