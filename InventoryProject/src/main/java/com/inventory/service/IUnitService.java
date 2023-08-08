@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.inventory.db1.entities.Unit;
+import com.inventory.requestVM.UnitFilterRequest;
 import com.inventory.responseVM.UnitResponse;
 
 public interface IUnitService {
@@ -30,6 +31,6 @@ public interface IUnitService {
 
 	public boolean isUnitExistsByName(String name);
 	
-	public Page<UnitResponse> getAllUnit(Pageable pageable);
+	public Page<UnitResponse> getAllUnit(Pageable pageable, String search, UnitFilterRequest filterRequest);
 
 }
