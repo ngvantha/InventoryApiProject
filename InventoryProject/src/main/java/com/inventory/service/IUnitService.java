@@ -15,7 +15,7 @@ public interface IUnitService {
 
 	public UnitResponse getUnitByID(int id);
 
-	public Unit getUnitByName(String name);
+	public UnitResponse getUnitByName(String name);
 
 	public void createUnit(Unit department);
 
