@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.inventory.db1.entities.Unit;
 
-public interface IUnitRepository extends JpaRepository<Unit, Integer>,JpaSpecificationExecutor<Unit> {
-//	public Unit findByName(String name);
-//
-//	public boolean existsByName(String name);
-	
+public interface IUnitRepository extends JpaRepository<Unit, Integer>, JpaSpecificationExecutor<Unit> {
+
+	public Unit findByName(String name);
+
+	//public boolean existsByName(String name);
+
 }

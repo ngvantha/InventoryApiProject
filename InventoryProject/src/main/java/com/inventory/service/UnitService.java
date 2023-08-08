@@ -30,16 +30,16 @@ public class UnitService implements IUnitService {
 
 	@Override
 	public UnitResponse getUnitByID(int id) {
-		// TODO Auto-generated method stub
 		Unit unit = repository.findById(id).get();
 		UnitResponse result = modelMapper.map(unit, UnitResponse.class);
 		return result;
 	}
 
 	@Override
-	public Unit getUnitByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public UnitResponse getUnitByName(String name) {
+		Unit unit = repository.findByName(name);
+		UnitResponse result = modelMapper.map(unit, UnitResponse.class);
+		return result;
 	}
 
 	@Override

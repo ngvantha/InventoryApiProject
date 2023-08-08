@@ -1,6 +1,5 @@
 package com.inventory.controller;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,16 +20,22 @@ public class UnitController {
 	@Autowired
 	private IUnitService service;
 
+	@GetMapping
+	public ResponseEntity<Page<UnitResponse>> getAllUnites(Pageable pageable,
+			@RequestParam(value = "search", required = false) String search, UnitFilterRequest filterRequest) {
+		Page<UnitResponse> response = service.getAllUnit(pageable, search, filterRequest);
+		return ResponseEntity.ok(response);
+	}
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<UnitResponse> getUnitId(@PathVariable(name = "id") int id) {
 		UnitResponse response = service.getUnitByID(id);
 		return ResponseEntity.ok(response);
 	}
-
-	@GetMapping
-	public ResponseEntity<Page<UnitResponse>> getAllUnites(Pageable pageable,
-			@RequestParam(value = "search", required = false) String search, UnitFilterRequest filterRequest) {
-		Page<UnitResponse> response = service.getAllUnit(pageable, search, filterRequest);
+	
+	@GetMapping(value = "/name/{name}")
+	public ResponseEntity<UnitResponse> getUnitId(@PathVariable(name = "name") String name) {
+		UnitResponse response = service.getUnitByName(name);
 		return ResponseEntity.ok(response);
 	}
 
