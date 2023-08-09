@@ -3,13 +3,13 @@ package com.inventory.config.GlobalExceptionHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-
+import org.modelmapper.MappingException;
+import org.modelmapper.spi.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -151,26 +151,26 @@ public class ResponseEntityException {
 	// Độ dài trường vượt quá giới hạn cho phép (@Size).
 	// Trường không hợp lệ đối với một kiểu dữ liệu cụ thể (@Email, @Pattern).
 	// Giá trị trường không nằm trong phạm vi cho phép (@Min, @Max). V.v.
-	@SuppressWarnings("rawtypes")
-	@ExceptionHandler(ConstraintViolationException.class)
-	public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException exception) {
-
-		String message = getMessage("MethodArgumentNotValidException.message");
-		String detailMessage = exception.getLocalizedMessage();
-		// error
-		Map<String, String> errors = new HashMap<>();
-		for (ConstraintViolation violation : exception.getConstraintViolations()) {
-			String fieldName = violation.getPropertyPath().toString();
-			String errorMessage = violation.getMessage();
-			errors.put(fieldName, errorMessage);
-		}
-		int code = 5;
-		String moreInformation = "http://localhost:8080/api/v1/exception/5";
-
-		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, errors, code, moreInformation);
-
-		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-	}
+//	@SuppressWarnings("rawtypes")
+//	@ExceptionHandler(ConstraintViolationException.class)
+//	public ResponseEntity<Object> handleConstraintViolationException(org.hibernate.exception.ConstraintViolationException exception) {
+//
+//		String message = getMessage("MethodArgumentNotValidException.message");
+//		String detailMessage = exception.getLocalizedMessage();
+//		// error
+//		Map<String, String> errors = new HashMap<>();
+//		for (jakarta.validation.ConstraintViolation violation : exception.getConstraintName()) {
+//			String fieldName = violation.getPropertyPath().toString();
+//			String errorMessage = violation.getMessage();
+//			errors.put(fieldName, errorMessage);
+//		}
+//		int code = 5;
+//		String moreInformation = "http://localhost:8080/api/v1/exception/5";
+//
+//		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, errors, code, moreInformation);
+//
+//		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+//	}
 
 	// MissingServletRequestPartException: This exception is thrown when when the
 	// part of a multipart request not found
@@ -209,6 +209,36 @@ public class ResponseEntityException {
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
 
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler({ DataIntegrityViolationException.class })
+	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
+
+		String message = "DataIntegrityViolationException Message";
+		String detailMessage = exception.getLocalizedMessage();
+		int code = 8;
+		String moreInformation = "http://localhost:8080/api/v1/exception/8";
+		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler({ MappingException.class })
+	public ResponseEntity<Object> handleMappingException(MappingException exception) {
+
+		String message = getMessageFromMappingException(exception);
+		String detailMessage = exception.getLocalizedMessage();
+		int code = 9;
+		String moreInformation = "http://localhost:8080/api/v1/exception/9";
+		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	}
+	
+	private String getMessageFromMappingException(MappingException exception) {
+		String message = "ModelMapper mapping errors: ";
+		for (ErrorMessage method : exception.getErrorMessages()) {
+			message += method + ", ";
+		}
+		return message.substring(0, message.length() - 2);
 	}
 
 }
