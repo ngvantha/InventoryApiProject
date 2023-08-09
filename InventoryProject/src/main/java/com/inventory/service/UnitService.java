@@ -14,7 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.inventory.db1.entities.Unit;
 import com.inventory.db1.repositories.IUnitRepository;
-import com.inventory.requestVM.UnitFilterRequest;
+import com.inventory.requestVM.UnitRequest.CreateUnitRequest;
+import com.inventory.requestVM.UnitRequest.UnitFilterRequest;
 import com.inventory.responseVM.UnitResponse;
 import com.inventory.specification.UnitSpecification;
 
@@ -43,9 +44,13 @@ public class UnitService implements IUnitService {
 	}
 
 	@Override
-	public void createUnit(Unit department) {
-		// TODO Auto-generated method stub
-
+	public int createUnit(CreateUnitRequest request) {
+		Unit unit = modelMapper.map(request, Unit.class);
+		var result = repository.save(unit);
+		if(result.getId()!= null) {
+			return result.getId();
+		}
+		return 0;
 	}
 
 	@Override
