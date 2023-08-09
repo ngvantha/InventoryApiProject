@@ -4,7 +4,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import com.inventory.db1.entities.Unit;
-import com.inventory.requestVM.UnitFilterRequest;
+import com.inventory.requestVM.UnitRequest.UnitFilterRequest;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

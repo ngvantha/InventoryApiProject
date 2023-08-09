@@ -1,4 +1,4 @@
-package com.inventory.requestVM;
+package com.inventory.requestVM.UnitRequest;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

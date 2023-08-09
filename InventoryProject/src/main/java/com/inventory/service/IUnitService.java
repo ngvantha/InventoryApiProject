@@ -7,7 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.inventory.db1.entities.Unit;
-import com.inventory.requestVM.UnitFilterRequest;
+import com.inventory.requestVM.UnitRequest.CreateUnitRequest;
+import com.inventory.requestVM.UnitRequest.UnitFilterRequest;
 import com.inventory.responseVM.UnitResponse;
 
 public interface IUnitService {
@@ -17,7 +18,7 @@ public interface IUnitService {
 
 	public UnitResponse getUnitByName(String name);
 
-	public void createUnit(Unit department);
+	public int createUnit(CreateUnitRequest request);
 
 	public void updateUnit(int id, String newName);
 
