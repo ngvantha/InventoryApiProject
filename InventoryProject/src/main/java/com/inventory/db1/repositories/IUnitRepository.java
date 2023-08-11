@@ -9,6 +9,6 @@ public interface IUnitRepository extends JpaRepository<Unit, Integer>, JpaSpecif
 
 	public Unit findByName(String name);
 
-	//public boolean existsByName(String name);
+	public boolean existsByName(String name);
 
 }

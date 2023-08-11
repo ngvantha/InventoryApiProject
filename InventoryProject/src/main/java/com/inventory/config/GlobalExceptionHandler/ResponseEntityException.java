@@ -26,6 +26,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class ResponseEntityException {
@@ -151,26 +153,26 @@ public class ResponseEntityException {
 	// Độ dài trường vượt quá giới hạn cho phép (@Size).
 	// Trường không hợp lệ đối với một kiểu dữ liệu cụ thể (@Email, @Pattern).
 	// Giá trị trường không nằm trong phạm vi cho phép (@Min, @Max). V.v.
-//	@SuppressWarnings("rawtypes")
-//	@ExceptionHandler(ConstraintViolationException.class)
-//	public ResponseEntity<Object> handleConstraintViolationException(org.hibernate.exception.ConstraintViolationException exception) {
-//
-//		String message = getMessage("MethodArgumentNotValidException.message");
-//		String detailMessage = exception.getLocalizedMessage();
-//		// error
-//		Map<String, String> errors = new HashMap<>();
-//		for (jakarta.validation.ConstraintViolation violation : exception.getConstraintName()) {
-//			String fieldName = violation.getPropertyPath().toString();
-//			String errorMessage = violation.getMessage();
-//			errors.put(fieldName, errorMessage);
-//		}
-//		int code = 5;
-//		String moreInformation = "http://localhost:8080/api/v1/exception/5";
-//
-//		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, errors, code, moreInformation);
-//
-//		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-//	}
+	@SuppressWarnings("rawtypes")
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException exception) {
+
+		String message = getMessage("MethodArgumentNotValidException.message");
+		String detailMessage = exception.getLocalizedMessage();
+		// error
+		Map<String, String> errors = new HashMap<>();
+		for (ConstraintViolation violation : exception.getConstraintViolations()) {
+			String fieldName = violation.getPropertyPath().toString();
+			String errorMessage = violation.getMessage();
+			errors.put(fieldName, errorMessage);
+		}
+		int code = 5;
+		String moreInformation = "http://localhost:8080/api/v1/exception/5";
+
+		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, errors, code, moreInformation);
+
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	}
 
 	// MissingServletRequestPartException: This exception is thrown when when the
 	// part of a multipart request not found

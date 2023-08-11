@@ -49,7 +49,7 @@ public class UnitController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<?> createUnit(@RequestBody CreateUnitRequest request) {
+	public ResponseEntity<?> createUnit(@RequestBody @Valid CreateUnitRequest request) {
 		var result = service.createUnit(request);
 		return ResponseEntity.ok(result);
 	}
