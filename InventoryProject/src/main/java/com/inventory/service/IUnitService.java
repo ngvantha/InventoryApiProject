@@ -9,10 +9,10 @@ import org.springframework.data.domain.Pageable;
 import com.inventory.db1.entities.Unit;
 import com.inventory.requestVM.UnitRequest.CreateUnitRequest;
 import com.inventory.requestVM.UnitRequest.UnitFilterRequest;
+import com.inventory.requestVM.UnitRequest.UpdateUnitRequest;
 import com.inventory.responseVM.UnitResponse;
 
 public interface IUnitService {
-	//public Page<Unit> getAllUnit(Pageable pageable, DepartmentFilter filter, String search);
 
 	public UnitResponse getUnitByID(int id);
 
@@ -20,11 +20,11 @@ public interface IUnitService {
 
 	public int createUnit(CreateUnitRequest request);
 
-	public void updateUnit(int id, String newName);
+	public String updateNameOnlyUnit(int id, String newName);
 
-	public void updateUnit(Unit department);
+	public UnitResponse updateUnit(UpdateUnitRequest request);
 
-	public void deleteUnit(int id);
+	public int deleteUnit(int id);
 	
 	public void deleteUnit(List<Integer> ids);
 

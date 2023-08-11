@@ -20,6 +20,6 @@ public class UnitIdExistsValidator implements ConstraintValidator<UnitIdExists, 
 			return true;
 		}
 
-		return !service.isUnitExistsByID(id);
+		return service.isUnitExistsByID(id);
 	}
 }
