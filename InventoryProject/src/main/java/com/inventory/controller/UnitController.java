@@ -1,11 +1,14 @@
 package com.inventory.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,6 +70,30 @@ public class UnitController {
 	@PutMapping(value ="/{id}/name/{name}")
 	public ResponseEntity<?> updateNameOnlyUnit(@UnitIdExists @PathVariable(name = "id") int id,@UnitNameExists @PathVariable(name="name") String name) {
 		var result = service.updateNameOnlyUnit(id, name);
+		return ResponseEntity.ok(result);
+	}
+	
+	@DeleteMapping("/Status/{id}")
+	public ResponseEntity<?> deleteUnitWithStatus(@UnitIdExists @PathVariable(name = "id") int id) {
+		var result = service.deleteUnitWithStatus(id);
+		return ResponseEntity.ok(result);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteUnit(@UnitIdExists @PathVariable(name = "id") int id) {
+		var result = service.deleteUnit(id);
+		return ResponseEntity.ok(result);
+	}
+	
+	@DeleteMapping("/MultipleDelete")
+	public ResponseEntity<?> multipleDeleteUnit(@RequestBody List<Integer> ids) {
+		var result = service.multipleDeleteUnit(ids);
+		return ResponseEntity.ok(result);
+	}
+	
+	@DeleteMapping("/MultipleDeleteStatus")
+	public ResponseEntity<?> multipleDeleteUnitWithStatus(@RequestBody List<Integer> ids) {
+		var result = service.multipleDeleteUnitWithStatus(ids);
 		return ResponseEntity.ok(result);
 	}
 
