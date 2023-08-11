@@ -1,6 +1,7 @@
 package com.inventory.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -16,6 +17,7 @@ import com.inventory.db1.entities.Unit;
 import com.inventory.db1.repositories.IUnitRepository;
 import com.inventory.requestVM.UnitRequest.CreateUnitRequest;
 import com.inventory.requestVM.UnitRequest.UnitFilterRequest;
+import com.inventory.requestVM.UnitRequest.UpdateUnitRequest;
 import com.inventory.responseVM.UnitResponse;
 import com.inventory.specification.UnitSpecification;
 
@@ -54,24 +56,6 @@ public class UnitService implements IUnitService {
 	}
 
 	@Override
-	public void updateUnit(int id, String newName) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updateUnit(Unit department) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteUnit(int id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void deleteUnit(List<Integer> ids) {
 		// TODO Auto-generated method stub
 
@@ -96,6 +80,35 @@ public class UnitService implements IUnitService {
 		}.getType());
 		Page<UnitResponse> dtoPages = new PageImpl<>(dtos, pageable, entityPages.getTotalElements());
 		return dtoPages;
+	}
+
+	@Override
+	public String updateNameOnlyUnit(int id, String newName) {
+		Optional<Unit> optionalUnit = repository.findById(id);
+		if(optionalUnit.isPresent()) {
+			Unit unit = optionalUnit.get();
+			unit.setName(newName);
+			var result = repository.save(unit);
+			if(result.getName()!=null) {
+				return result.getName();
+			}
+			return null;
+		}
+		return null; 
+	}
+
+	@Override
+	public UnitResponse updateUnit(UpdateUnitRequest request) {
+		Unit unit = modelMapper.map(request, Unit.class);
+		var unitResult = repository.save(unit);
+		UnitResponse result = modelMapper.map(unitResult, UnitResponse.class);
+		return result; 
+	}
+
+	@Override
+	public int deleteUnit(int id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
