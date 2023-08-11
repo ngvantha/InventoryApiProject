@@ -1,9 +1,11 @@
 package com.inventory.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +19,12 @@ import com.inventory.requestVM.UnitRequest.UnitFilterRequest;
 import com.inventory.responseVM.UnitResponse;
 import com.inventory.service.IUnitService;
 
+import jakarta.validation.Valid;
+
+
 @RestController
 @RequestMapping(value = "api/v1/units")
+@Validated
 public class UnitController {
 	@Autowired
 	private IUnitService service;
@@ -43,7 +49,7 @@ public class UnitController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<?> createUnit(@RequestBody CreateUnitRequest request) {
+	public ResponseEntity<?> createUnit(@RequestBody @Valid CreateUnitRequest request) {
 		var result = service.createUnit(request);
 		return ResponseEntity.ok(result);
 	}

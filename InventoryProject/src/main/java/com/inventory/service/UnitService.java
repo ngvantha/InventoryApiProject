@@ -79,14 +79,12 @@ public class UnitService implements IUnitService {
 
 	@Override
 	public boolean isUnitExistsByID(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		return repository.existsById(id);
 	}
 
 	@Override
 	public boolean isUnitExistsByName(String name) {
-		// TODO Auto-generated method stub
-		return false;
+		return repository.existsByName(name);
 	}
 
 	public Page<UnitResponse> getAllUnit(Pageable pageable, String search, UnitFilterRequest filterRequest) {
