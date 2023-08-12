@@ -24,13 +24,14 @@ import jakarta.validation.Payload;
 public @interface ValidBoolean {
 	String message() default "The value must be true or false";
 
-    Class<?>[] groups() default {};
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
-    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
-    @Retention(RUNTIME)
-    @Documented
-    @interface List {
-    	ValidBoolean[] value();
-    }
+	Class<? extends Payload>[] payload() default {};
+
+	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+	@Retention(RUNTIME)
+	@Documented
+	@interface List {
+		ValidBoolean[] value();
+	}
 }

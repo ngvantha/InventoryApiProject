@@ -1,6 +1,5 @@
 package com.inventory.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +23,10 @@ import com.inventory.requestVM.UnitRequest.UpdateUnitRequest;
 import com.inventory.responseVM.UnitResponse;
 import com.inventory.service.IUnitService;
 import com.inventory.validation.Unit.UnitIdExists;
+import com.inventory.validation.Unit.UnitIdsExists;
 import com.inventory.validation.Unit.UnitNameExists;
 
 import jakarta.validation.Valid;
-
 
 @RestController
 @RequestMapping(value = "api/v1/units")
@@ -42,57 +41,59 @@ public class UnitController {
 		Page<UnitResponse> response = service.getAllUnit(pageable, search, filterRequest);
 		return ResponseEntity.ok(response);
 	}
-	
+
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<UnitResponse> getUnitId(@PathVariable(name = "id") int id) {
 		UnitResponse response = service.getUnitByID(id);
 		return ResponseEntity.ok(response);
 	}
-	
+
 	@GetMapping(value = "/name/{name}")
 	public ResponseEntity<UnitResponse> getUnitId(@PathVariable(name = "name") String name) {
 		UnitResponse response = service.getUnitByName(name);
 		return ResponseEntity.ok(response);
 	}
-	
+
 	@PostMapping()
 	public ResponseEntity<?> createUnit(@RequestBody @Valid CreateUnitRequest request) {
 		var result = service.createUnit(request);
 		return ResponseEntity.ok(result);
 	}
-	
+
 	@PutMapping()
 	public ResponseEntity<UnitResponse> updateUnit(@RequestBody @Valid UpdateUnitRequest request) {
 		var result = service.updateUnit(request);
 		return ResponseEntity.ok(result);
 	}
-	
-	@PutMapping(value ="/{id}/name/{name}")
-	public ResponseEntity<?> updateNameOnlyUnit(@UnitIdExists @PathVariable(name = "id") int id,@UnitNameExists @PathVariable(name="name") String name) {
+
+	@PutMapping(value = "/{id}/name/{name}")
+	public ResponseEntity<?> updateNameOnlyUnit(@UnitIdExists @PathVariable(name = "id") int id,
+			@UnitNameExists @PathVariable(name = "name") String name) {
 		var result = service.updateNameOnlyUnit(id, name);
 		return ResponseEntity.ok(result);
 	}
-	
+
 	@DeleteMapping("/Status/{id}")
 	public ResponseEntity<?> deleteUnitWithStatus(@UnitIdExists @PathVariable(name = "id") int id) {
 		var result = service.deleteUnitWithStatus(id);
 		return ResponseEntity.ok(result);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteUnit(@UnitIdExists @PathVariable(name = "id") int id) {
 		var result = service.deleteUnit(id);
 		return ResponseEntity.ok(result);
 	}
-	
+
 	@DeleteMapping("/MultipleDelete")
-	public ResponseEntity<?> multipleDeleteUnit(@RequestBody List<Integer> ids) {
+	public ResponseEntity<?> multipleDeleteUnit(@UnitIdsExists @RequestParam(name = "ids") List<Integer> ids) {
 		var result = service.multipleDeleteUnit(ids);
 		return ResponseEntity.ok(result);
 	}
-	
+
 	@DeleteMapping("/MultipleDeleteStatus")
-	public ResponseEntity<?> multipleDeleteUnitWithStatus(@RequestBody List<Integer> ids) {
+	public ResponseEntity<?> multipleDeleteUnitWithStatus(
+			@UnitIdsExists @RequestParam(name = "ids") List<Integer> ids) {
 		var result = service.multipleDeleteUnitWithStatus(ids);
 		return ResponseEntity.ok(result);
 	}

@@ -57,11 +57,6 @@ public class UnitService implements IUnitService {
 
 	@Override
 	public int multipleDeleteUnit(List<Integer> ids) {
-		for (int id : ids) {
-			if (!repository.existsById(id)) {
-				return id;
-			}
-		}
 		long countBeforDel = repository.count();
 		repository.deleteAllById(ids);
 		long countAfterDel = repository.count();

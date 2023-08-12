@@ -3,14 +3,14 @@ package com.inventory.validation.Unit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
-import com.inventory.service.IUnitService;
+import com.inventory.db1.repositories.IUnitRepository;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 public class UnitIdExistsValidator implements ConstraintValidator<UnitIdExists, Integer> {
 	@Autowired
-	private IUnitService service;
+	private IUnitRepository repository;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -20,6 +20,6 @@ public class UnitIdExistsValidator implements ConstraintValidator<UnitIdExists, 
 			return true;
 		}
 
-		return service.isUnitExistsByID(id);
+		return repository.existsById(id);
 	}
 }
