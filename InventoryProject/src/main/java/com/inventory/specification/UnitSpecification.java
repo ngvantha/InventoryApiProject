@@ -86,7 +86,7 @@ class CustomSpecification implements Specification<Unit> {
 		if (field.equalsIgnoreCase("unitDescription")) {
 			return criteriaBuilder.like(root.get("unitDescription"), "%" + value.toString() + "%");
 		}
-		
+
 		if (field.equalsIgnoreCase("delStatus")) {
 			return criteriaBuilder.equal(root.get("delStatus"), value);
 		}

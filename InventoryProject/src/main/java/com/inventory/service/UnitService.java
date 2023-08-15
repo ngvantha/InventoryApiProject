@@ -49,16 +49,21 @@ public class UnitService implements IUnitService {
 	public int createUnit(CreateUnitRequest request) {
 		Unit unit = modelMapper.map(request, Unit.class);
 		var result = repository.save(unit);
-		if(result.getId()!= null) {
+		if (result.getId() != null) {
 			return result.getId();
 		}
 		return 0;
 	}
 
 	@Override
-	public void deleteUnit(List<Integer> ids) {
-		// TODO Auto-generated method stub
-
+	public int multipleDeleteUnit(List<Integer> ids) {
+		long countBeforDel = repository.count();
+		repository.deleteAllById(ids);
+		long countAfterDel = repository.count();
+		if (countAfterDel == countBeforDel - ids.size()) {
+			return 0;
+		}
+		return ids.size();
 	}
 
 	@Override
@@ -85,16 +90,16 @@ public class UnitService implements IUnitService {
 	@Override
 	public String updateNameOnlyUnit(int id, String newName) {
 		Optional<Unit> optionalUnit = repository.findById(id);
-		if(optionalUnit.isPresent()) {
+		if (optionalUnit.isPresent()) {
 			Unit unit = optionalUnit.get();
 			unit.setName(newName);
 			var result = repository.save(unit);
-			if(result.getName()!=null) {
+			if (result.getName() != null) {
 				return result.getName();
 			}
 			return null;
 		}
-		return null; 
+		return null;
 	}
 
 	@Override
@@ -102,12 +107,53 @@ public class UnitService implements IUnitService {
 		Unit unit = modelMapper.map(request, Unit.class);
 		var unitResult = repository.save(unit);
 		UnitResponse result = modelMapper.map(unitResult, UnitResponse.class);
-		return result; 
+		return result;
 	}
 
 	@Override
 	public int deleteUnit(int id) {
-		// TODO Auto-generated method stub
+		repository.deleteById(id);
+		Optional<Unit> optionalUnit = repository.findById(id);
+		if (optionalUnit.isPresent()) {
+			return optionalUnit.get().getId();
+		}
+		return 0;
+	}
+
+	@Override
+	public int deleteUnitWithStatus(int id) {
+		Optional<Unit> optionalUnit = repository.findById(id);
+		if (optionalUnit.isPresent()) {
+			Unit unit = optionalUnit.get();
+			unit.setDelStatus(true);
+			var result = repository.save(unit);
+			if (result.getId() != null) {
+				return result.getId();
+			}
+			return 0;
+		}
+		return 0;
+	}
+
+	@Override
+	public int multipleDeleteUnitWithStatus(List<Integer> ids) {
+		int count = 0;
+		for (int id : ids) {
+			if (repository.existsById(id)) {
+				Optional<Unit> optionalUnit = repository.findById(id);
+				if (optionalUnit.isPresent()) {
+					Unit unit = optionalUnit.get();
+					unit.setDelStatus(true);
+					var result = repository.save(unit);
+					if (result.getId() != null) {
+						count++;
+					}
+				}
+			}
+		}
+		if (ids.size() == count) {
+			return count;
+		}
 		return 0;
 	}
 
