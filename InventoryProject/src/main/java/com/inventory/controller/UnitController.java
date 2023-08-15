@@ -24,11 +24,13 @@ import com.inventory.validation.Unit.UnitIdExists;
 import com.inventory.validation.Unit.UnitNameExists;
 
 import jakarta.validation.Valid;
+import lombok.extern.log4j.Log4j2;
 
 
 @RestController
 @RequestMapping(value = "api/v1/units")
 @Validated
+@Log4j2
 public class UnitController {
 	@Autowired
 	private IUnitService service;
@@ -37,36 +39,44 @@ public class UnitController {
 	public ResponseEntity<Page<UnitResponse>> getAllUnites(Pageable pageable,
 			@RequestParam(value = "search", required = false) String search, UnitFilterRequest filterRequest) {
 		Page<UnitResponse> response = service.getAllUnit(pageable, search, filterRequest);
+		log.info(response);
 		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<UnitResponse> getUnitId(@PathVariable(name = "id") int id) {
 		UnitResponse response = service.getUnitByID(id);
+		log.info(response);
 		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping(value = "/name/{name}")
 	public ResponseEntity<UnitResponse> getUnitId(@PathVariable(name = "name") String name) {
 		UnitResponse response = service.getUnitByName(name);
+		log.info(response);
 		return ResponseEntity.ok(response);
 	}
 	
 	@PostMapping()
 	public ResponseEntity<?> createUnit(@RequestBody @Valid CreateUnitRequest request) {
+		log.info(request);
 		var result = service.createUnit(request);
+		log.info(result);
 		return ResponseEntity.ok(result);
 	}
 	
 	@PutMapping()
 	public ResponseEntity<UnitResponse> updateUnit(@RequestBody @Valid UpdateUnitRequest request) {
+		log.info(request);
 		var result = service.updateUnit(request);
+		log.info(result);
 		return ResponseEntity.ok(result);
 	}
 	
 	@PutMapping(value ="/{id}/name/{name}")
 	public ResponseEntity<?> updateNameOnlyUnit(@UnitIdExists @PathVariable(name = "id") int id,@UnitNameExists @PathVariable(name="name") String name) {
 		var result = service.updateNameOnlyUnit(id, name);
+		log.info(result);
 		return ResponseEntity.ok(result);
 	}
 
