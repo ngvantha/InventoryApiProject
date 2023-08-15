@@ -28,8 +28,10 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.log4j.Log4j2;
 
 @ControllerAdvice
+@Log4j2
 public class ResponseEntityException {
 
 	@Autowired
@@ -53,7 +55,7 @@ public class ResponseEntityException {
 		String detailMessage = exception.getLocalizedMessage();
 		int code = 1;
 		String moreInformation = "http://localhost:8080/api/v1/exception/1";
-
+		log.error(message, detailMessage, exception);
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
 
 		return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -70,7 +72,7 @@ public class ResponseEntityException {
 		String detailMessage = exception.getLocalizedMessage();
 		int code = 2;
 		String moreInformation = "http://localhost:8080/api/v1/exception/2";
-
+		log.error(message, detailMessage, exception);
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
 		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
@@ -84,7 +86,7 @@ public class ResponseEntityException {
 		String detailMessage = exception.getLocalizedMessage();
 		int code = 3;
 		String moreInformation = "http://localhost:8080/api/v1/exception/3";
-
+		log.error(message, detailMessage, exception);
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
 		return new ResponseEntity<>(response, HttpStatus.METHOD_NOT_ALLOWED);
 	}
@@ -107,7 +109,7 @@ public class ResponseEntityException {
 		String detailMessage = exception.getLocalizedMessage();
 		int code = 4;
 		String moreInformation = "http://localhost:8080/api/v1/exception/4";
-
+		log.error(message, detailMessage, exception);
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
 
 		return new ResponseEntity<>(response, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
@@ -139,7 +141,7 @@ public class ResponseEntityException {
 		}
 		int code = 5;
 		String moreInformation = "http://localhost:8080/api/v1/exception/5";
-
+		log.error(message, detailMessage, exception);
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, errors, code, moreInformation);
 
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -168,7 +170,7 @@ public class ResponseEntityException {
 		}
 		int code = 5;
 		String moreInformation = "http://localhost:8080/api/v1/exception/5";
-
+		log.error(message, detailMessage, exception);
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, errors, code, moreInformation);
 
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -188,7 +190,7 @@ public class ResponseEntityException {
 		String detailMessage = exception.getLocalizedMessage();
 		int code = 6;
 		String moreInformation = "http://localhost:8080/api/v1/exception/6";
-
+		log.error(message, detailMessage, exception);
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
 
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -207,7 +209,7 @@ public class ResponseEntityException {
 		String detailMessage = exception.getLocalizedMessage();
 		int code = 7;
 		String moreInformation = "http://localhost:8080/api/v1/exception/7";
-
+		log.error(message, detailMessage, exception);
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
 
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -220,6 +222,7 @@ public class ResponseEntityException {
 		String detailMessage = exception.getLocalizedMessage();
 		int code = 8;
 		String moreInformation = "http://localhost:8080/api/v1/exception/8";
+		log.error(message, detailMessage, exception);
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}
@@ -231,6 +234,7 @@ public class ResponseEntityException {
 		String detailMessage = exception.getLocalizedMessage();
 		int code = 9;
 		String moreInformation = "http://localhost:8080/api/v1/exception/9";
+		log.error(message, detailMessage, exception);
 		ApiErrorResponse response = new ApiErrorResponse(message, detailMessage, null, code, moreInformation);
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}
