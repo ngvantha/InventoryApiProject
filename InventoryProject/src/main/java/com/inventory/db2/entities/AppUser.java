@@ -5,13 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import com.inventory.db1.entities.ProductDetailUnit;
-import com.inventory.db1.entities.Unit;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -25,21 +20,21 @@ import lombok.NonNull;
 @Table(name = "AppUsers", catalog = "tShopSolution")
 @NoArgsConstructor
 @Data
-public class AppUsers implements Serializable {
+public class AppUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "Id")
+	@Column(name = "Id", unique = true)
 	@NonNull
-	private UUID Id;
+	private UUID id;
 
-	@Column(name = "FirstName", length = 200, nullable = false)
+	@Column(name = "FirstName", length = 200)
 	@NonNull
-	private String FirstName;
+	private String firstName;
 
-	@Column(name = "LastName", length = 200, nullable = false)
+	@Column(name = "LastName", length = 200)
 	@NonNull
-	private String LastName;
+	private String lastName;
 
 	@Column(name = "DOB")
 	@NonNull
@@ -50,52 +45,52 @@ public class AppUsers implements Serializable {
 
 	@Column(name = "UserName")
 	@NonNull
-	private String UserName;
+	private String userName;
 
 	@Column(name = "NormalizedUserName")
-	private String NormalizedUserName;
+	private String normalizedUserName;
 
-	@Column(name = "Email", length = 255, nullable = false, unique = true)
+	@Column(name = "Email")
 	@NonNull
-	private String Email;
+	private String email;
 
-	@Column(name = "NormalizedEmail", length = 255, nullable = false, unique = true)
-	private String NormalizedEmail;
+	@Column(name = "NormalizedEmail")
+	private String normalizedEmail;
 
 	@Column(name = "EmailConfirmed")
-	private Boolean EmailConfirmed;
+	private Boolean emailConfirmed;
 
 	@Column(name = "PasswordHash")
-	private String PasswordHash;
+	private String passwordHash;
 
 	@Column(name = "SecurityStamp")
-	private String SecurityStamp;
+	private String securityStamp;
 
 	@Column(name = "ConcurrencyStamp")
-	private String ConcurrencyStamp;
+	private String concurrencyStamp;
 
 	@Column(name = "PhoneNumber")
-	private String PhoneNumber;
+	private String phoneNumber;
 
 	@Column(name = "PhoneNumberConfirmed")
-	private Boolean PhoneNumberConfirmed;
+	private Boolean phoneNumberConfirmed;
 
 	@Column(name = "TwoFactorEnabled")
-	private Boolean TwoFactorEnabled;
+	private Boolean twoFactorEnabled;
 
 	@Column(name = "LockoutEnd")
-	private Date LockoutEnd;
+	private Date lockoutEnd;
 
 	@Column(name = "LockoutEnabled")
 	@NonNull
-	private Boolean LockoutEnabled;
+	private Boolean lockoutEnabled;
 
 	@Column(name = "AccessFailedCount")
 	@NonNull
-	private String AccessFailedCount;
+	private String accessFailedCount;
 
 	@ManyToMany
 	@JoinTable(name = "AppUserRoles", joinColumns = { @JoinColumn(name = "UserId") }, inverseJoinColumns = {
 			@JoinColumn(name = "RoleId") })
-	private List<AppRoles> appRoles;
+	private List<AppRole> appRoles;
 }

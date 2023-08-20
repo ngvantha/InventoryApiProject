@@ -3,7 +3,7 @@ package com.inventory.specification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
-import com.inventory.db2.entities.AppRoles;
+import com.inventory.db2.entities.AppRole;
 import com.inventory.requestVM.UnitRequest.AppRoleFilterRequest;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -15,8 +15,8 @@ import lombok.RequiredArgsConstructor;
 
 public class AppRoleSpecification {
 	@SuppressWarnings("deprecation")
-	public static Specification<AppRoles> buildWhere(String search, AppRoleFilterRequest filterRequest) {
-		Specification<AppRoles> where = null;
+	public static Specification<AppRole> buildWhere(String search, AppRoleFilterRequest filterRequest) {
+		Specification<AppRole> where = null;
 
 		if (!StringUtils.isEmpty(search)) {
 			search = search.trim();
@@ -30,7 +30,7 @@ public class AppRoleSpecification {
 
 @SuppressWarnings("serial")
 @RequiredArgsConstructor
-class CustomSpecificationAppRole implements Specification<AppRoles> {
+class CustomSpecificationAppRole implements Specification<AppRole> {
 
 	@NonNull
 	private String field;
@@ -38,7 +38,7 @@ class CustomSpecificationAppRole implements Specification<AppRoles> {
 	private Object value;
 
 	@Override
-	public Predicate toPredicate(Root<AppRoles> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+	public Predicate toPredicate(Root<AppRole> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 
 		if (field.equalsIgnoreCase("name")) {
 			return criteriaBuilder.like(root.get("name"), "%" + value.toString() + "%");

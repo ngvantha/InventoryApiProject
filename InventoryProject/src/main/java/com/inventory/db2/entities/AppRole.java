@@ -17,14 +17,14 @@ import lombok.NonNull;
 @Table(name = "AppRoles", catalog = "tShopSolution")
 @NoArgsConstructor
 @Data
-public class AppRoles implements Serializable {
+public class AppRole implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "Id")
+	@Column(name = "Id", unique = true)
 	@NonNull
 	private UUID Id;
 
@@ -42,6 +42,6 @@ public class AppRoles implements Serializable {
 	private String ConcurrencyStamp;
 
 	@ManyToMany(mappedBy = "appRoles")
-	private List<AppUsers> appUsers;
+	private List<AppUser> appUsers;
 
 }

@@ -4,8 +4,8 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.inventory.db2.entities.AppUsers;
+import com.inventory.db2.entities.AppUser;
 
-public interface IAppUserRepository extends JpaRepository<AppUsers, UUID> {
+public interface IAppUserRepository extends JpaRepository<AppUser, UUID> {
 
 }

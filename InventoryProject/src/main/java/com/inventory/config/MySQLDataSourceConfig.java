@@ -73,6 +73,8 @@ public class MySQLDataSourceConfig {
 //		}
 //	}
 	@Bean
+	@Qualifier("mysqlDataSource")
+	@Primary
 	public EntityManagerFactoryBuilder entityManagerFactoryBuilder() {
 		return new EntityManagerFactoryBuilder(new HibernateJpaVendorAdapter(), new HashMap<>(), null);
 	}
