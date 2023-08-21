@@ -41,7 +41,7 @@ public class AppUser implements Serializable {
 	private Date DOB;
 
 	@Column(name = "CreatedDate")
-	private Date CreatedDate;
+	private Date createdDate;
 
 	@Column(name = "UserName")
 	@NonNull
