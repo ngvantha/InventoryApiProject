@@ -33,8 +33,10 @@ public class SQLServerDataSourceConfig {
 	@Bean(name = Constants.ENTITY_MANAGER_FACTORY_2)
 	public LocalContainerEntityManagerFactoryBean sqlServerEntityManagerFactory(EntityManagerFactoryBuilder builder,
 			@Qualifier("sqlServerDataSource") DataSource dataSource) {
-		return builder.dataSource(dataSource).packages(Constants.PACKAGE_DB2_REPOSITORIES)
-				.persistenceUnit(Constants.JPA_CONNET_DB2_UNIT_NAME).build();
+		return builder.dataSource(dataSource)
+				.packages(Constants.PACKAGE_DB2_ENTITIES)
+				.persistenceUnit(Constants.JPA_CONNET_DB2_UNIT_NAME)
+				.build();
 	}
 
 	@Bean(name = Constants.TRANSACTION_MANAGER_2)

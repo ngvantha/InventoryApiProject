@@ -26,20 +26,20 @@ public class AppRole implements Serializable {
 	@Id
 	@Column(name = "Id", unique = true)
 	@NonNull
-	private UUID Id;
+	private UUID id;
 
 	@Column(name = "Description", length = 200)
 	@NonNull
-	private String Description;
+	private String description;
 
 	@Column(name = "Name")
-	private String Name;
+	private String name;
 
 	@Column(name = "NormalizedName")
-	private String NormalizedName;
+	private String normalizedName;
 
 	@Column(name = "ConcurrencyStamp")
-	private String ConcurrencyStamp;
+	private String concurrencyStamp;
 
 	@ManyToMany(mappedBy = "appRoles")
 	private List<AppUser> appUsers;
