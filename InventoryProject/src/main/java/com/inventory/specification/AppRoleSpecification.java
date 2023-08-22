@@ -4,7 +4,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import com.inventory.db2.entities.AppRole;
-import com.inventory.requestVM.UnitRequest.AppRoleFilterRequest;
+import com.inventory.requestVM.AppRoleRequest.AppRoleFilterRequest;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

@@ -3,10 +3,8 @@ package com.inventory.specification;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
-import com.inventory.db2.entities.AppRole;
 import com.inventory.db2.entities.AppUser;
-import com.inventory.requestVM.UnitRequest.AppRoleFilterRequest;
-import com.inventory.requestVM.UnitRequest.AppUserFilterRequest;
+import com.inventory.requestVM.AppUserRequest.AppUserFilterRequest;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

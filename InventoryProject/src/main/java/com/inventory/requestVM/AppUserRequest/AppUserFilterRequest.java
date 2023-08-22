@@ -1,4 +1,4 @@
-package com.inventory.requestVM.UnitRequest;
+package com.inventory.requestVM.AppUserRequest;
 
 import java.util.Date;
 
