@@ -77,7 +77,6 @@ public class UnitService implements IUnitService {
 	}
 
 	public Page<UnitResponse> getAllUnit(Pageable pageable, String search, UnitFilterRequest filterRequest) {
-		// TODO Auto-generated method stub
 		Specification<Unit> where = UnitSpecification.buildWhere(search, filterRequest);
 		Page<Unit> entityPages = repository.findAll(where, pageable);
 		// convert entities --> dtos

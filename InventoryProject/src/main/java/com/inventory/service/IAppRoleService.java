@@ -17,15 +17,15 @@ public interface IAppRoleService {
 
 	public AppRoleResponse getRoleByName(String name);
 
-	public int createRole(CreateRoleRequest request);
+	public UUID createRole(CreateRoleRequest request);
 
 	public String updateNameOnlyRole(UUID id, String newName);
 
 	public AppRoleResponse updateRole(UpdateRoleRequest request);
 
-	public int deleteRole(UUID id);
+	public UUID deleteRole(UUID id);
 
-	public int deleteRoleWithStatus(UUID id);
+	public UUID deleteRoleWithStatus(UUID id);
 
 	public int multipleDeleteRole(List<UUID> ids);
 
