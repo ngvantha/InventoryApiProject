@@ -11,25 +11,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-@Entity
-@Table(name = "AppUserRoles", catalog = "tShopSolution")
-@NoArgsConstructor
-@Data
-public class AppUserRoles implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@Column(name = "UserId")
-	@NonNull
-	private UUID userId;
-	
-	@Id
-	@Column(name = "RoleId")
-	@NonNull
-	private UUID roleId;
-
-}
+//@Entity
+//@Table(name = "AppUserRoles", catalog = "tShopSolution")
+//@NoArgsConstructor
+//@Data
+//public class AppUserRoles implements Serializable {
+//
+//	/**
+//	 * 
+//	 */
+//	private static final long serialVersionUID = 1L;
+//	
+//	@Id
+//	@Column(name = "UserId")
+//	@NonNull
+//	private UUID userId;
+//	
+//	@Id
+//	@Column(name = "RoleId")
+//	@NonNull
+//	private UUID roleId;
+//
+//}

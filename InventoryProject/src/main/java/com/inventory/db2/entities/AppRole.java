@@ -17,31 +17,31 @@ import lombok.NonNull;
 @Table(name = "AppRoles", catalog = "tShopSolution")
 @NoArgsConstructor
 @Data
-public class AppRoles implements Serializable {
+public class AppRole implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "Id")
+	@Column(name = "Id", unique = true)
 	@NonNull
-	private UUID Id;
+	private UUID id;
 
 	@Column(name = "Description", length = 200)
 	@NonNull
-	private String Description;
+	private String description;
 
 	@Column(name = "Name")
-	private String Name;
+	private String name;
 
 	@Column(name = "NormalizedName")
-	private String NormalizedName;
+	private String normalizedName;
 
 	@Column(name = "ConcurrencyStamp")
-	private String ConcurrencyStamp;
+	private String concurrencyStamp;
 
 	@ManyToMany(mappedBy = "appRoles")
-	private List<AppUsers> appUsers;
+	private List<AppUser> appUsers;
 
 }

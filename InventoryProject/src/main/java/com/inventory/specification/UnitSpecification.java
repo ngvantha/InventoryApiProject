@@ -20,14 +20,14 @@ public class UnitSpecification {
 
 		if (!StringUtils.isEmpty(search)) {
 			search = search.trim();
-			CustomSpecification name = new CustomSpecification("name", search);
-			CustomSpecification unitDescription = new CustomSpecification("unitDescription", search);
+			CustomSpecificationUnit name = new CustomSpecificationUnit("name", search);
+			CustomSpecificationUnit unitDescription = new CustomSpecificationUnit("unitDescription", search);
 			where = Specification.where(name).or(unitDescription);
 		}
 
 		// if there is filter by min id
 		if (filterRequest != null && filterRequest.getMinId() != null) {
-			CustomSpecification minId = new CustomSpecification("minId", filterRequest.getMinId());
+			CustomSpecificationUnit minId = new CustomSpecificationUnit("minId", filterRequest.getMinId());
 			if (where == null) {
 				where = minId;
 			} else {
@@ -37,7 +37,7 @@ public class UnitSpecification {
 
 		// if there is filter by max id
 		if (filterRequest != null && filterRequest.getMaxId() != null) {
-			CustomSpecification maxId = new CustomSpecification("maxId", filterRequest.getMaxId());
+			CustomSpecificationUnit maxId = new CustomSpecificationUnit("maxId", filterRequest.getMaxId());
 			if (where == null) {
 				where = maxId;
 			} else {
@@ -47,7 +47,7 @@ public class UnitSpecification {
 
 		// if there is filter by status
 		if (filterRequest != null && filterRequest.getStatus() != null) {
-			CustomSpecification status = new CustomSpecification("delStatus", filterRequest.getStatus());
+			CustomSpecificationUnit status = new CustomSpecificationUnit("delStatus", filterRequest.getStatus());
 			if (where == null) {
 				where = status;
 			} else {
@@ -61,7 +61,7 @@ public class UnitSpecification {
 
 @SuppressWarnings("serial")
 @RequiredArgsConstructor
-class CustomSpecification implements Specification<Unit> {
+class CustomSpecificationUnit implements Specification<Unit> {
 
 	@NonNull
 	private String field;
