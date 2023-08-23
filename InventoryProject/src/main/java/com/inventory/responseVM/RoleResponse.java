@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 @Data
 @NoArgsConstructor
-public class AppRoleResponse {
+public class RoleResponse {
 	
 	@NonNull
 	private UUID id;

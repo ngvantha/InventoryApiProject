@@ -9,19 +9,19 @@ import org.springframework.data.domain.Pageable;
 import com.inventory.requestVM.AppRoleRequest.RoleFilterRequest;
 import com.inventory.requestVM.AppRoleRequest.CreateRoleRequest;
 import com.inventory.requestVM.AppRoleRequest.UpdateRoleRequest;
-import com.inventory.responseVM.AppRoleResponse;
+import com.inventory.responseVM.RoleResponse;
 
 public interface IAppRoleService {
 
-	public AppRoleResponse getRoleByID(UUID id);
+	public RoleResponse getRoleByID(UUID id);
 
-	public AppRoleResponse getRoleByName(String name);
+	public RoleResponse getRoleByName(String name);
 
 	public UUID createRole(CreateRoleRequest request);
 
 	public String updateNameOnlyRole(UUID id, String newName);
 
-	public AppRoleResponse updateRole(UpdateRoleRequest request);
+	public RoleResponse updateRole(UpdateRoleRequest request);
 
 	public UUID deleteRole(UUID id);
 
@@ -35,6 +35,6 @@ public interface IAppRoleService {
 
 	public boolean isRoleExistsByName(String name);
 
-	public Page<AppRoleResponse> getAllRole(Pageable pageable, String search, RoleFilterRequest filterRequest);
+	public Page<RoleResponse> getAllRole(Pageable pageable, String search, RoleFilterRequest filterRequest);
 
 }

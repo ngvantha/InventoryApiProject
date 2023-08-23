@@ -18,7 +18,7 @@ import com.inventory.db2.repositories.IAppRoleRepository;
 import com.inventory.requestVM.AppRoleRequest.CreateRoleRequest;
 import com.inventory.requestVM.AppRoleRequest.RoleFilterRequest;
 import com.inventory.requestVM.AppRoleRequest.UpdateRoleRequest;
-import com.inventory.responseVM.AppRoleResponse;
+import com.inventory.responseVM.RoleResponse;
 import com.inventory.responseVM.UnitResponse;
 import com.inventory.specification.AppRoleSpecification;
 import com.inventory.specification.UnitSpecification;
@@ -33,16 +33,16 @@ public class AppRoleService implements IAppRoleService {
 	
 	
 	@Override
-	public AppRoleResponse getRoleByID(UUID id) {
+	public RoleResponse getRoleByID(UUID id) {
 		AppRole role = repository.findById(id).get();
-		AppRoleResponse result = modelMapper.map(role, AppRoleResponse.class);
+		RoleResponse result = modelMapper.map(role, RoleResponse.class);
 		return result;
 	}
 
 	@Override
-	public AppRoleResponse getRoleByName(String name) {
+	public RoleResponse getRoleByName(String name) {
 		AppRole role = repository.findByName(name);
-		AppRoleResponse result = modelMapper.map(role, AppRoleResponse.class);
+		RoleResponse result = modelMapper.map(role, RoleResponse.class);
 		return result;
 	}
 
@@ -72,10 +72,10 @@ public class AppRoleService implements IAppRoleService {
 	}
 
 	@Override
-	public AppRoleResponse updateRole(UpdateRoleRequest request) {
+	public RoleResponse updateRole(UpdateRoleRequest request) {
 		AppRole role = modelMapper.map(request, AppRole.class);
 		var roleResult = repository.save(role);
-		AppRoleResponse result = modelMapper.map(roleResult, AppRoleResponse.class);
+		RoleResponse result = modelMapper.map(roleResult, RoleResponse.class);
 		return result;
 	}
 
@@ -123,13 +123,13 @@ public class AppRoleService implements IAppRoleService {
 	}
 
 	@Override
-	public Page<AppRoleResponse> getAllRole(Pageable pageable, String search, RoleFilterRequest filterRequest) {
+	public Page<RoleResponse> getAllRole(Pageable pageable, String search, RoleFilterRequest filterRequest) {
 		Specification<AppRole> where = AppRoleSpecification.buildWhere(search, filterRequest);
 		Page<AppRole> entityPages = repository.findAll(where, pageable);
 		// convert entities --> dtos
-		List<AppRoleResponse> dtos = modelMapper.map(entityPages.getContent(), new TypeToken<List<AppRoleResponse>>() {
+		List<RoleResponse> dtos = modelMapper.map(entityPages.getContent(), new TypeToken<List<RoleResponse>>() {
 		}.getType());
-		Page<AppRoleResponse> dtoPages = new PageImpl<>(dtos, pageable, entityPages.getTotalElements());
+		Page<RoleResponse> dtoPages = new PageImpl<>(dtos, pageable, entityPages.getTotalElements());
 		return dtoPages;
 	}
 

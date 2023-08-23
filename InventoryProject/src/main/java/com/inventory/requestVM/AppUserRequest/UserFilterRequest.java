@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class AppUserFilterRequest {
+public class UserFilterRequest {
 
 	@ValidDate(message = "Invalid date format. Please format yyyy-MM-dd. ", pattern = "yyyy-MM-dd")
 	private Date createdMaxDate;

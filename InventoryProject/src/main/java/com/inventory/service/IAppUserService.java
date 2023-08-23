@@ -1,40 +1,40 @@
 package com.inventory.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.inventory.db1.entities.Unit;
-import com.inventory.requestVM.UnitRequest.CreateUnitRequest;
-import com.inventory.requestVM.UnitRequest.UnitFilterRequest;
-import com.inventory.requestVM.UnitRequest.UpdateUnitRequest;
-import com.inventory.responseVM.UnitResponse;
+import com.inventory.requestVM.AppUserRequest.CreateUserRequest;
+import com.inventory.requestVM.AppUserRequest.UpdateUserRequest;
+import com.inventory.requestVM.AppUserRequest.UserFilterRequest;
+import com.inventory.responseVM.UserResponse;
 
 public interface IAppUserService {
 
-	public UnitResponse getUnitByID(int id);
+	public UserResponse getUserByID(UUID id);
 
-	public UnitResponse getUnitByName(String name);
+	public UserResponse getUserByName(String name);
 
-	public int createUnit(CreateUnitRequest request);
+	public UUID createUser(CreateUserRequest request);
 
-	public String updateNameOnlyUnit(int id, String newName);
+	public String updateNameOnlyUser(UUID id, String newName);
 
-	public UnitResponse updateUnit(UpdateUnitRequest request);
+	public UserResponse updateUser(UpdateUserRequest request);
 
-	public int deleteUnit(int id);
+	public UUID deleteUser(UUID id);
 
-	public int deleteUnitWithStatus(int id);
+	public UUID deleteUserWithStatus(UUID id);
 
-	public int multipleDeleteUnit(List<Integer> ids);
+	public int multipleDeleteUser(List<UUID> ids);
 
-	public int multipleDeleteUnitWithStatus(List<Integer> ids);
+	public int multipleDeleteUserWithStatus(List<UUID> ids);
 
-	public boolean isUnitExistsByID(int id);
+	public boolean isUserExistsByID(UUID id);
 
-	public boolean isUnitExistsByName(String name);
+	public boolean isUserExistsByName(String name);
 
-	public Page<UnitResponse> getAllUnit(Pageable pageable, String search, UnitFilterRequest filterRequest);
+	public Page<UserResponse> getAllUser(Pageable pageable, String search, UserFilterRequest filterRequest);
 
 }
