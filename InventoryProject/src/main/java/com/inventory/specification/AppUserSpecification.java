@@ -4,7 +4,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import com.inventory.db2.entities.AppUser;
-import com.inventory.requestVM.AppUserRequest.AppUserFilterRequest;
+import com.inventory.requestVM.AppUserRequest.UserFilterRequest;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 public class AppUserSpecification {
 	@SuppressWarnings("deprecation")
-	public static Specification<AppUser> buildWhere(String search, AppUserFilterRequest filterRequest) {
+	public static Specification<AppUser> buildWhere(String search, UserFilterRequest filterRequest) {
 		Specification<AppUser> where = null;
 
 		if (!StringUtils.isEmpty(search)) {

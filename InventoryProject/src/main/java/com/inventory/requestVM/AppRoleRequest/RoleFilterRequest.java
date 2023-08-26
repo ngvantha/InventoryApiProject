@@ -1,5 +1,5 @@
 package com.inventory.requestVM.AppRoleRequest;
 
-public class AppRoleFilterRequest {
+public class RoleFilterRequest {
 
 }

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import com.inventory.db2.entities.AppRole;
-import com.inventory.requestVM.AppRoleRequest.AppRoleFilterRequest;
+import com.inventory.requestVM.AppRoleRequest.RoleFilterRequest;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 public class AppRoleSpecification {
 	@SuppressWarnings("deprecation")
-	public static Specification<AppRole> buildWhere(String search, AppRoleFilterRequest filterRequest) {
+	public static Specification<AppRole> buildWhere(String search, RoleFilterRequest filterRequest) {
 		Specification<AppRole> where = null;
 
 		if (!StringUtils.isEmpty(search)) {

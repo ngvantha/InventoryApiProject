@@ -9,4 +9,7 @@ import com.inventory.db2.entities.AppRole;
 
 public interface IAppRoleRepository extends JpaRepository<AppRole, UUID>,  JpaSpecificationExecutor<AppRole>  {
 
+	public AppRole findByName(String name);
+	
+	public boolean existsByName(String name);
 }
