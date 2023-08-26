@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.inventory.db1.entities.Unit;
 import com.inventory.db2.entities.AppRole;
@@ -23,6 +25,8 @@ import com.inventory.responseVM.UnitResponse;
 import com.inventory.specification.AppRoleSpecification;
 import com.inventory.specification.UnitSpecification;
 
+@Service
+@Transactional
 public class AppRoleService implements IAppRoleService {
 
 	@Autowired
