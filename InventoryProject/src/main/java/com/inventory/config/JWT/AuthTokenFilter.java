@@ -1,6 +1,7 @@
 package com.inventory.config.JWT;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
+@Configuration
 public class AuthTokenFilter extends OncePerRequestFilter {
 	  @Autowired
 	  private JwtTokenUtil jwtUtils;
@@ -46,15 +48,12 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	      log.error("Cannot set user authentication: {}", e);
 	    }
 
-	    try {
-			filterChain.doFilter(request, response);
-		} catch (java.io.IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			try {
+				filterChain.doFilter(request, response);
+			} catch (java.io.IOException | ServletException e) {
+				log.error(getFilterName(), request, response, filterChain, e);;
+				e.printStackTrace();
+			}
 	  }
 
 	  private String parseJwt(HttpServletRequest request) {
