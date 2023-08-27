@@ -46,14 +46,14 @@ public class UnitController {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<UnitResponse> getUnitId(@PathVariable(name = "id") int id) {
+	public ResponseEntity<UnitResponse> getUnitById(@PathVariable(name = "id") int id) {
 		UnitResponse response = service.getUnitByID(id);
 		log.info(response);
 		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping(value = "/name/{name}")
-	public ResponseEntity<UnitResponse> getUnitId(@PathVariable(name = "name") String name) {
+	public ResponseEntity<UnitResponse> getUnitByName(@PathVariable(name = "name") String name) {
 		UnitResponse response = service.getUnitByName(name);
 		log.info(response);
 		return ResponseEntity.ok(response);

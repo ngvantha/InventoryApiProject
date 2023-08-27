@@ -53,6 +53,7 @@ public class AppRoleService implements IAppRoleService {
 	@Override
 	public UUID createRole(CreateRoleRequest request) {
 		AppRole role = modelMapper.map(request, AppRole.class);
+		role.setId(UUID.randomUUID());
 		var result = repository.save(role);
 		if (result.getId() != null) {
 			return result.getId();
@@ -61,7 +62,7 @@ public class AppRoleService implements IAppRoleService {
 	}
 
 	@Override
-	public String updateNameOnlyRole(UUID id, String newName) {
+	public String updateRoleOnlyName(UUID id, String newName) {
 		Optional<AppRole> optionalRole = repository.findById(id);
 		if (optionalRole.isPresent()) {
 			AppRole role = optionalRole.get();

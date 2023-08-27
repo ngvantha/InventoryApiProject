@@ -29,7 +29,7 @@ public class CreateRoleRequest {
 	@Length(max = 255, message = "The normalizedName's length is max 255 characters")
 	private String normalizedName;
 
-	@NotBlank(message = "The concurrencyStamp mustn't be null value")
+	//@NotBlank(message = "The concurrencyStamp mustn't be null value")
 	@Length(max = 255, message = "The concurrencyStamp's length is max 255 characters")
 	private String concurrencyStamp;
 

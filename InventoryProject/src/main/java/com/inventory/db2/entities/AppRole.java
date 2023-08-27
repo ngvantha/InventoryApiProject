@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
-@Table(name = "AppRoles", catalog = "tShopSolution")
+@Table(name = "AppRoles")
 @NoArgsConstructor
 @Data
 public class AppRole implements Serializable {

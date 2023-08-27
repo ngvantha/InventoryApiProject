@@ -48,14 +48,14 @@ public class RoleController {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<RoleResponse> getRoleId(@PathVariable(name = "id") UUID id) {
+	public ResponseEntity<RoleResponse> getRoleById(@PathVariable(name = "id") UUID id) {
 		RoleResponse response = service.getRoleByID(id);
 		log.info(response);
 		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping(value = "/name/{name}")
-	public ResponseEntity<RoleResponse> getRoleId(@PathVariable(name = "name") String name) {
+	public ResponseEntity<RoleResponse> getRoleById(@PathVariable(name = "name") String name) {
 		RoleResponse response = service.getRoleByName(name);
 		log.info(response);
 		return ResponseEntity.ok(response);
@@ -78,9 +78,9 @@ public class RoleController {
 	}
 
 	@PutMapping(value = "/{id}/name/{name}")
-	public ResponseEntity<?> updateNameOnlyRole(@RoleIdExists @PathVariable(name = "id") UUID id,
+	public ResponseEntity<?> updateRoleOnlyName(@RoleIdExists @PathVariable(name = "id") UUID id,
 			@RoleNameExists @PathVariable(name = "name") String name) {
-		var result = service.updateNameOnlyRole(id, name);
+		var result = service.updateRoleOnlyName(id, name);
 		log.info(result);
 		return ResponseEntity.ok(result);
 	}
