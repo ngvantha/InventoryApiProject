@@ -1,9 +1,11 @@
 package com.inventory.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inventory.config.GlobalExceptionHandler.ApiMessageResponse;
 import com.inventory.config.JWT.AuthenticationModel;
 import com.inventory.config.JWT.CustomAuthenticationService;
 import com.inventory.config.JWT.JwtTokenUtil;
@@ -26,6 +29,7 @@ import com.inventory.db2.repositories.IAppUserRepository;
 import com.inventory.requestVM.AppUserRequest.LoginRequest;
 import com.inventory.requestVM.AppUserRequest.SignupRequest;
 import com.inventory.responseVM.JwtResponse;
+import com.inventory.responseVM.RoleResponse;
 
 import jakarta.validation.Valid;
 
@@ -34,69 +38,67 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {
 
-	 @Autowired
-	 private CustomAuthenticationService authenticationService;
+	@Autowired
+	AuthenticationManager authenticationManager;
+	@Autowired
+	JwtTokenUtil jwtUtils;
+
+	@Autowired
+	IAppUserRepository userRepository;
+
+	@Autowired
+	IAppRoleRepository roleRepository;
+
+	@Autowired
+	private ModelMapper modelMapper;
 	
-	  @PostMapping("/signin")
-	  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-		  var result = authenticationService.authenticateUser(loginRequest);
-	    return ResponseEntity.ok(result);
-	  }
-	  
-//	  @PostMapping("/signup")
-//	  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-//	    if (userRepository.existsByUserName(signUpRequest.getUsername())) {
-//	      return ResponseEntity
-//	          .badRequest()
-//	          .body(new ApiErrorResponse("Error","Username is already taken!"));
-//	    }
-//
-//	    if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-//	      return ResponseEntity
-//	          .badRequest()
-//	          .body(new ApiErrorResponse("Error"," Email is already in use!"));
-//	    }
-//
-//	    // Create new user's account
-//	    AppUser user = new AppUser(signUpRequest.getUsername(), 
-//	               signUpRequest.getEmail(),
-//	               encoder.encode(signUpRequest.getPassword()));
-//
-//	    Set<String> strRoles = signUpRequest.getRole();
-//	    Set<AppRole> roles = new HashSet<>();
-//
-//	    if (strRoles == null) {
-//	      AppRole userRole = roleRepository.findByName(ERole.ROLE_USER)
-//	          .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//	      roles.add(userRole);
-//	    } else {
-//	      strRoles.forEach(role -> {
-//	        switch (role) {
-//	        case "admin":
-//	          Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-//	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//	          roles.add(adminRole);
-//
-//	          break;
-//	        case "mod":
-//	          Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-//	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//	          roles.add(modRole);
-//
-//	          break;
-//	        default:
-//	          Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-//	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//	          roles.add(userRole);
-//	        }
-//	      });
-//	    }
-//
-//	    user.setRoles(roles);
-//	    userRepository.save(user);
-//
-//	    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-//	  }
-//	  
-	  
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
+	@PostMapping("/signin")
+	public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassWord()));
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
+
+		AuthenticationModel userDetails = (AuthenticationModel) authentication.getPrincipal();
+		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
+				.collect(Collectors.toList());
+		var result = new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(),
+				roles);
+		return ResponseEntity.ok(result);
+	}
+
+	@PostMapping("/signup")
+	public ResponseEntity<ApiMessageResponse> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+		if (userRepository.existsByUserName(signUpRequest.getUserName())) {
+			return ResponseEntity.badRequest().body(new ApiMessageResponse("Error", "Username is already taken!"));
+		}
+
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+			return ResponseEntity.badRequest().body(new ApiMessageResponse("Error", "Email is already in use!"));
+		}
+		// Create new user's account
+		var pass = signUpRequest.getPasswordHash();
+		signUpRequest.setPasswordHash(passwordEncoder.encode(pass));
+		AppUser user = modelMapper.map(signUpRequest, AppUser.class);
+		List<RoleResponse> roles = signUpRequest.getAppRoles();
+		List<AppRole> approles = new ArrayList<>();
+		for (RoleResponse roleResponse : roles) {
+			AppRole mapRole = modelMapper.map(roleResponse, AppRole.class);
+			AppRole role = roleRepository.findById(mapRole.getId()).get();
+			if (role != null) {
+				approles.add(role);
+			}
+		}
+		user.setAppRoles(approles);
+		var result = userRepository.save(user);
+		if (result.getId() != null) {
+			return ResponseEntity.ok(new ApiMessageResponse("Succsess", "User registered successfully!"));
+		}
+		return ResponseEntity.badRequest().body(new ApiMessageResponse("Failed!", "User registered successfully!"));
+	}
+
 }

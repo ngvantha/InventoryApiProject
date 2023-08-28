@@ -1,14 +1,46 @@
 package com.inventory.requestVM.AppUserRequest;
 
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.inventory.responseVM.RoleResponse;
+
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 public class SignupRequest {
-
-	private String username;
+	private String firstName;
+	private String lastName;
+	@CreationTimestamp
+	private Date DOB;
+	private Date createdDate = new Date();
+	private String userName;
+	private String normalizedUserName = userName;
 	private String email;
-	private String password;
+	//private String normalizedEmail;
+	//private Boolean emailConfirmed = false;
+	private String passwordHash;
+	//private String securityStamp = null;
+	//private String concurrencyStamp = null;
+	private String phoneNumber;
+	//private Boolean phoneNumberConfirmed = false;
+	//private Boolean twoFactorEnabled = false;
+	//private Date lockoutEnd;
+	//private Boolean lockoutEnabled = false;
+	//private String accessFailedCount = "0";
+	private List<RoleResponse> appRoles = null;
 	
+	@PrePersist
+	@PreUpdate
+	void prePersist() {
+		if (getNormalizedUserName() == null) {
+			setNormalizedUserName(getUserName());
+		}
+	}
 }

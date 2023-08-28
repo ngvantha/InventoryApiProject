@@ -12,7 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,8 +41,8 @@ public class AppUserService implements IAppUserService {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	//@Autowired
-	//private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public UserResponse getUserByID(UUID id) {
@@ -62,8 +62,7 @@ public class AppUserService implements IAppUserService {
 	public UUID createUser(CreateUserRequest request) {
 		request.setId(UUID.randomUUID());
 		var pass = request.getPasswordHash();
-		//request.setPasswordHash(passwordEncoder.encode(pass));
-		// request.setPasswordHash();
+		request.setPasswordHash(passwordEncoder.encode(pass));
 		AppUser user = modelMapper.map(request, AppUser.class);
 		List<RoleResponse> roles = request.getAppRoles();
 		List<AppRole> approles = new ArrayList<>();
