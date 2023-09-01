@@ -13,7 +13,8 @@ public class ValidBooleanValidator implements ConstraintValidator<ValidBoolean, 
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		return isValidBoolean(value);
 	}
+
 	private boolean isValidBoolean(String input) {
-	    return input.equalsIgnoreCase("true") || input.equalsIgnoreCase("false");
+		return input.equalsIgnoreCase("true") || input.equalsIgnoreCase("false");
 	}
 }

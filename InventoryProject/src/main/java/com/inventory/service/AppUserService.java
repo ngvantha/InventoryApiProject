@@ -60,10 +60,8 @@ public class AppUserService implements IAppUserService {
 
 	@Override
 	public UUID createUser(CreateUserRequest request) {
-		request.setId(UUID.randomUUID());
 		var pass = request.getPasswordHash();
 		request.setPasswordHash(passwordEncoder.encode(pass));
-		// request.setPasswordHash();
 		AppUser user = modelMapper.map(request, AppUser.class);
 		List<RoleResponse> roles = request.getAppRoles();
 		List<AppRole> approles = new ArrayList<>();

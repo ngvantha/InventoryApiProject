@@ -30,10 +30,6 @@ public class ProductDetail implements Serializable {
 	@Column(name = "PRODUCT_DETAIL_ID")
 	private Integer id;
 	
-//	@Column(name = "PRODUCT_ID", nullable = false)
-//	@NonNull
-//	private Integer PRODUCT_ID;
-	
 	@Column(name = "PRODUCT_CODE", length = 255)
 	@NonNull
 	private String productCode;

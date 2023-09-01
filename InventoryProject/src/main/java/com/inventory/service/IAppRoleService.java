@@ -19,7 +19,7 @@ public interface IAppRoleService {
 
 	public UUID createRole(CreateRoleRequest request);
 
-	public String updateNameOnlyRole(UUID id, String newName);
+	public String updateRoleOnlyName(UUID id, String newName);
 
 	public RoleResponse updateRole(UpdateRoleRequest request);
 

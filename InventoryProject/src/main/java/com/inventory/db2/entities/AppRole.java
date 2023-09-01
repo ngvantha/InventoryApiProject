@@ -6,6 +6,9 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
@@ -14,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
-@Table(name = "AppRoles", catalog = "tShopSolution")
+@Table(name = "AppRoles")
 @NoArgsConstructor
 @Data
 public class AppRole implements Serializable {
@@ -25,6 +28,7 @@ public class AppRole implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "Id", unique = true)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@NonNull
 	private UUID id;
 
@@ -41,7 +45,7 @@ public class AppRole implements Serializable {
 	@Column(name = "ConcurrencyStamp")
 	private String concurrencyStamp;
 
-	@ManyToMany(mappedBy = "appRoles")
+	@ManyToMany(mappedBy = "appRoles",fetch = FetchType.LAZY)
 	private List<AppUser> appUsers;
 
 }

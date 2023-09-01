@@ -14,16 +14,13 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.inventory.db1.entities.Unit;
 import com.inventory.db2.entities.AppRole;
 import com.inventory.db2.repositories.IAppRoleRepository;
 import com.inventory.requestVM.AppRoleRequest.CreateRoleRequest;
 import com.inventory.requestVM.AppRoleRequest.RoleFilterRequest;
 import com.inventory.requestVM.AppRoleRequest.UpdateRoleRequest;
 import com.inventory.responseVM.RoleResponse;
-import com.inventory.responseVM.UnitResponse;
 import com.inventory.specification.AppRoleSpecification;
-import com.inventory.specification.UnitSpecification;
 
 @Service
 @Transactional
@@ -61,7 +58,7 @@ public class AppRoleService implements IAppRoleService {
 	}
 
 	@Override
-	public String updateNameOnlyRole(UUID id, String newName) {
+	public String updateRoleOnlyName(UUID id, String newName) {
 		Optional<AppRole> optionalRole = repository.findById(id);
 		if (optionalRole.isPresent()) {
 			AppRole role = optionalRole.get();

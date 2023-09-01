@@ -24,7 +24,7 @@ public class RoleIdExistsValidator implements ConstraintValidator<RoleIdExists, 
 			return true;
 		}
 
-		return !repository.existsById(id);
+		return repository.existsById(id);
 	}
 	
 }
