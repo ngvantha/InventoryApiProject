@@ -31,10 +31,6 @@ public class ProductDetailUnitInventory implements Serializable {
 	@Column(name = "PRODUCT_DETAIL_UNIT_INVENTORIE_ID")
 	private Integer id;
 
-//	@Column(name = "PRODUCT_DETAIL_UNIT_ID")
-//	@NonNull
-//	private Integer PRODUCT_DETAIL_UNIT_ID;
-
 	@Column(name = "INPUT_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	@NonNull
@@ -70,7 +66,7 @@ public class ProductDetailUnitInventory implements Serializable {
 
 	@Column(name = "PRODUCT_DETAIL_BARCODE", length = 255)
 	@NonNull
-	private Boolean productDetailBarcode;
+	private String productDetailBarcode;
 	
 	@ManyToOne
 	@JoinColumn(name="PRODUCT_DETAIL_UNIT_ID")

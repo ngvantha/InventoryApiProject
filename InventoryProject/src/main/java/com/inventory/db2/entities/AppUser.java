@@ -57,14 +57,14 @@ public class AppUser implements Serializable {
 	private String userName;
 
 	@Column(name = "NormalizedUserName")
-	private String normalizedUserName = this.getUserName();
+	private String normalizedUserName = userName;
 
 	@Column(name = "Email")
 	@NonNull
 	private String email;
 
 	@Column(name = "NormalizedEmail")
-	private String normalizedEmail = this.getEmail();
+	private String normalizedEmail = email;
 
 	@Column(name = "EmailConfirmed", columnDefinition = "BIT DEFAULT 0")
 	private Boolean emailConfirmed = false;
@@ -96,7 +96,7 @@ public class AppUser implements Serializable {
 	@Column(name = "AccessFailedCount", insertable = true, columnDefinition = "integer default 0")
 	private Integer accessFailedCount = 0;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "AppUserRoles", joinColumns = { @JoinColumn(name = "UserId") }, inverseJoinColumns = {
 			@JoinColumn(name = "RoleId") })
 	private List<AppRole> appRoles;

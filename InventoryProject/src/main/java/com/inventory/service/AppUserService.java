@@ -60,7 +60,6 @@ public class AppUserService implements IAppUserService {
 
 	@Override
 	public UUID createUser(CreateUserRequest request) {
-		request.setId(UUID.randomUUID());
 		var pass = request.getPasswordHash();
 		request.setPasswordHash(passwordEncoder.encode(pass));
 		AppUser user = modelMapper.map(request, AppUser.class);
@@ -197,10 +196,10 @@ public class AppUserService implements IAppUserService {
 		Optional<AppUser> optionalUser = repository.findById(id);
 		if (optionalUser.isPresent()) {
 			AppUser user = optionalUser.get();
-//			if (passwordEncoder.encode(request.getOldPassWord()) != passwordEncoder.encode(user.getPasswordHash())) {
-//				throw new Exception("old pass word not IsVaild !!!");
-//			}
-//			user.setPasswordHash(passwordEncoder.encode(request.getNewPassWord()));
+			if (passwordEncoder.encode(request.getOldPassWord()) != passwordEncoder.encode(user.getPasswordHash())) {
+				throw new Exception("old pass word not IsVaild !!!");
+			}
+			user.setPasswordHash(passwordEncoder.encode(request.getNewPassWord()));
 			var result = repository.save(user);
 			if (result.getUserName() != null) {
 				return result.getUserName();

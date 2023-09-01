@@ -32,14 +32,6 @@ public class ProductDetailUnit implements Serializable {
 	@Column(name = "PRODUCT_DETAIL_UNIT_ID")
 	private Integer id;
 
-//	@Column(name = "PRODUCT_DETAIL_ID")
-//	@NonNull
-//	private Integer PRODUCT_DETAIL_ID;
-//
-//	@Column(name = "UNIT_ID")
-//	@NonNull
-//	private Integer UNIT_ID;
-
 	@Column(name = "IS_MAIN")
 	@NonNull
 	private Boolean isMain;

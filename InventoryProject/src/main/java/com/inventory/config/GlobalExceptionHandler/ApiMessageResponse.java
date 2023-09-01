@@ -1,36 +1,51 @@
 package com.inventory.config.GlobalExceptionHandler;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-@Data
-@AllArgsConstructor
-public class ApiMessageResponse {
-
-	@NonNull
-	private String message;
-
-	@NonNull
-	private String detailMessage;
+@JsonInclude(JsonInclude.Include.NON_NULL) // Bỏ qua các trường có giá trị null trong JSON serialization
+public class ApiMessageResponse extends ApiMessageBase {
+	public ApiMessageResponse(String message, String detailMessage) {
+		super(message, detailMessage);
+	}
 
 	private Object error;
 
-	@NonNull
 	private Integer code;
 
-	@NonNull
 	private String moreInformation;
 
-	public ApiMessageResponse(String message, String detailMessage) {
-		this.message = message;
-		this.detailMessage = detailMessage;
+	public Object getError() {
+		return error;
 	}
 
-	public ApiMessageResponse(String message, String detailMessage, Object error, Integer code) {
-		this.message = message;
-		this.detailMessage = detailMessage;
+	public void setError(Object error) {
 		this.error = error;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
 		this.code = code;
 	}
+
+	public String getMoreInformation() {
+		return moreInformation;
+	}
+
+	public void setMoreInformation(String moreInformation) {
+		this.moreInformation = moreInformation;
+	}
+
+	public ApiMessageResponse(String message, String detailMessage, Object error, Integer code,
+			String moreInformation) {
+		super(message, detailMessage);
+		this.error = error;
+		this.code = code;
+		this.moreInformation = moreInformation;
+	}
+
 }
+
+

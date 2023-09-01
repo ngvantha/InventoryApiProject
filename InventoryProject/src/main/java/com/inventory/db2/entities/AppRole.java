@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,7 +45,7 @@ public class AppRole implements Serializable {
 	@Column(name = "ConcurrencyStamp")
 	private String concurrencyStamp;
 
-	@ManyToMany(mappedBy = "appRoles")
+	@ManyToMany(mappedBy = "appRoles",fetch = FetchType.LAZY)
 	private List<AppUser> appUsers;
 
 }
