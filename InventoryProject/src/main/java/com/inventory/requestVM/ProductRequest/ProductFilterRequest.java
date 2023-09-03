@@ -1,4 +1,4 @@
-package com.inventory.requestVM.AppUserRequest;
+package com.inventory.requestVM.ProductRequest;
 
 import java.util.Date;
 
@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserFilterRequest {
-
+public class ProductFilterRequest {
+	
 	@ValidDate(message = "Invalid date format. Please format yyyy-MM-dd. ", pattern = "yyyy-MM-dd")
 	private Date createdMaxDate;
 	@ValidDate(message = "Invalid date format. Please format yyyy-MM-dd. ", pattern = "yyyy-MM-dd")
