@@ -41,6 +41,6 @@ public class Product implements Serializable {
 	@NonNull
 	private Boolean delStatus;
 	
-	@OneToMany(mappedBy="product")
+	@OneToMany(mappedBy="product",fetch = FetchType.LAZY)
 	private List<ProductDetail> ProductDetailes;
 }
