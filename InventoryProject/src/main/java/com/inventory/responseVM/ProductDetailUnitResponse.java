@@ -2,6 +2,7 @@ package com.inventory.responseVM;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,18 +15,21 @@ public class ProductDetailUnitResponse {
 
 	private Boolean isMain;
 
-	private Boolean conversionratio;
+	private Integer conversionratio;
 
 	private RatioType ratioType;
 
-	private Boolean ratioToUnit;
+	private Integer ratioToUnit;
 
 	private Boolean isStatus;
 
-	private ProductDetailResponse productDetail;
-
+//	@JsonIgnore
+//	private ProductDetailResponse productDetail;
+//
+	//@JsonIgnore
 	private UnitResponse Unit;
-
+	
+	//@JsonIgnore
 	private List<ProductDetailUnitInventoryResponse> productDetailUnitInventories;
 
 	public enum RatioType {

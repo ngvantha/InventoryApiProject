@@ -1,6 +1,5 @@
 package com.inventory.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -15,25 +14,44 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.inventory.db1.entities.Product;
 import com.inventory.db1.entities.ProductDetail;
+import com.inventory.db1.entities.ProductDetailUnit;
+import com.inventory.db1.entities.ProductDetailUnitInventory;
+import com.inventory.db1.entities.Unit;
+import com.inventory.db1.repositories.IProductDetaiUnitInventoryRepository;
+import com.inventory.db1.repositories.IProductDetailRepository;
+import com.inventory.db1.repositories.IProductDetailUnitRepository;
 import com.inventory.db1.repositories.IProductRepository;
-import com.inventory.db2.entities.AppRole;
+import com.inventory.requestVM.ProductRequest.CreateProductDetailRequest;
+import com.inventory.requestVM.ProductRequest.CreateProductDetailUnitInventoryRequest;
+import com.inventory.requestVM.ProductRequest.CreateProductDetailUnitRequest;
 import com.inventory.requestVM.ProductRequest.CreateProductRequest;
+import com.inventory.requestVM.ProductRequest.ProductDetailRequest;
+import com.inventory.requestVM.ProductRequest.ProductDetailUnitRequest;
 import com.inventory.requestVM.ProductRequest.ProductFilterRequest;
+import com.inventory.requestVM.ProductRequest.ProductRequest;
+import com.inventory.requestVM.ProductRequest.UnitRequest;
 import com.inventory.requestVM.ProductRequest.UpdateProductRequest;
-import com.inventory.responseVM.ProductDetailResponse;
 import com.inventory.responseVM.ProductResponse;
 import com.inventory.specification.ProductSpecification;
-
 
 @Service
 @Transactional
 public class ProductService implements IProductService {
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
 	@Autowired
 	private IProductRepository productRepository;
+	
+	@Autowired
+	private IProductDetailRepository productDetailRepository;
+	
+	@Autowired
+	private IProductDetailUnitRepository productDetailUnitRepository;
+	
+	@Autowired
+	private IProductDetaiUnitInventoryRepository productDetailUnitInventoryRepository;
 
 	@Override
 	public ProductResponse getProductByID(Integer id) {
@@ -49,11 +67,38 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
+	@Transactional
 	public int createProduct(CreateProductRequest request) {
-		Product product = modelMapper.map(request, Product.class);
-		var result = productRepository.save(product);
-		if (result != null) {
-			return result.getId();
+		ProductRequest productInfor =  modelMapper.map(request, ProductRequest.class);
+		Product product = modelMapper.map(productInfor, Product.class);
+        // Lưu sản phẩm vào cơ sở dữ liệu.
+		Product savedProduct = productRepository.save(product);
+        // Lưu danh sách chi tiết sản phẩm và các đơn vị chi tiết sản phẩm liên quan.
+		
+        for (CreateProductDetailRequest productDetailRq : request.getProductDetails()) {
+        	ProductDetailRequest productDetailInfor = modelMapper.map(productDetailRq, ProductDetailRequest.class);
+        	ProductDetail productDetail = modelMapper.map(productDetailInfor, ProductDetail.class);
+            productDetail.setProduct(savedProduct);
+            ProductDetail savedProductDetail = productDetailRepository.save(productDetail);
+
+            for (CreateProductDetailUnitRequest productDetailUnitRq : productDetailRq.getProductDetailUnits()) {
+            	ProductDetailUnitRequest  productDetailUnitInfor = modelMapper.map(productDetailUnitRq, ProductDetailUnitRequest.class);
+            	ProductDetailUnit productDetailUnit = modelMapper.map(productDetailUnitInfor, ProductDetailUnit.class);
+            	UnitRequest unitInfor =  modelMapper.map(productDetailUnitRq.getUnit(), UnitRequest.class);
+            	Unit unit =  modelMapper.map(unitInfor, Unit.class);
+                productDetailUnit.setProductDetail(savedProductDetail);
+                productDetailUnit.setUnit(unit);
+                ProductDetailUnit savedProductDetailUnit = productDetailUnitRepository.save(productDetailUnit);
+                for (CreateProductDetailUnitInventoryRequest productDetailUnitInventoryRq : productDetailUnitRq.getProductDetailUnitInventories()) {
+                	ProductDetailUnitInventory productDetailUnitInventory = modelMapper.map(productDetailUnitInventoryRq, ProductDetailUnitInventory.class);
+                    productDetailUnitInventory.setProductDetailUnit(savedProductDetailUnit);
+                    productDetailUnitInventoryRepository.save(productDetailUnitInventory);
+                }
+            }
+        }
+		
+		if (savedProduct != null) {
+			return savedProduct.getId();
 		}
 		return 0;
 	}

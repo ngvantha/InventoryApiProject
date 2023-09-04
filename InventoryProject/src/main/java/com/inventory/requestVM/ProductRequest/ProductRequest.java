@@ -1,13 +1,12 @@
 package com.inventory.requestVM.ProductRequest;
 
-import java.util.List;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CreateProductRequest {
+public class ProductRequest {
 	private Integer id;
 
 	private String productName;
@@ -19,7 +18,4 @@ public class CreateProductRequest {
 	private Boolean isStatus;
 	
 	private Boolean delStatus;
-	
-	private List<CreateProductDetailRequest> productDetails;
-
 }

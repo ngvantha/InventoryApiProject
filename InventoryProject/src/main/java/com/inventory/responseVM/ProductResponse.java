@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -17,7 +19,7 @@ public class ProductResponse  implements Serializable{
 
 	private Integer id;
 
-	private String name;
+	private String productName;
 	
 	private Integer viewCount;
 	
@@ -27,7 +29,8 @@ public class ProductResponse  implements Serializable{
 	
 	private Boolean delStatus;
 	
-	private List<ProductDetailResponse> ProductDetailes;
+	//@JsonIgnore
+	private List<ProductDetailResponse> productDetails;
 	
 
 }

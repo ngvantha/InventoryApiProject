@@ -1,20 +1,15 @@
-package com.inventory.responseVM;
+package com.inventory.requestVM.ProductRequest;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ProductDetailUnitInventoryResponse {
-
+public class CreateProductDetailUnitInventoryRequest {
 	private Integer id;
 
 	@JsonFormat(pattern="yyyy-MM-dd")
@@ -36,5 +31,4 @@ public class ProductDetailUnitInventoryResponse {
 
 	private String productDetailBarcode;
 
-	// private ProductDetailUnitResponse productDetailUnit;
 }
