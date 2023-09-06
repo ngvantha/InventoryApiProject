@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import com.inventory.db1.repositories.IProductDetailRepository;
-import com.inventory.db1.repositories.IProductRepository;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class ProductDetailIdExistsValidator implements ConstraintValidator<ProductIdExists, Integer>{
+public class ProductDetailIdExistsValidator implements ConstraintValidator<ProductDetailIdExists, Integer>{
 	@Autowired
 	private IProductDetailRepository repository;
 

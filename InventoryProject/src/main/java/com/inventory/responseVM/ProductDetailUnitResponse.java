@@ -19,17 +19,12 @@ public class ProductDetailUnitResponse {
 
 	private RatioType ratioType;
 
-	private Integer ratioToUnit;
+	private Double ratioToUnit;
 
 	private Boolean isStatus;
 
-//	@JsonIgnore
-//	private ProductDetailResponse productDetail;
-//
-	//@JsonIgnore
 	private UnitResponse Unit;
 	
-	//@JsonIgnore
 	private List<ProductDetailUnitInventoryResponse> productDetailUnitInventories;
 
 	public enum RatioType {

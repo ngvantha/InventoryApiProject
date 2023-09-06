@@ -12,8 +12,6 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import com.inventory.db1.entities.Product;
-
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

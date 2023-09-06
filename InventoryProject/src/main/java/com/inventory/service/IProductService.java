@@ -46,7 +46,7 @@ public interface IProductService {
 
 	public Page<ProductResponse> getAllProduct(Pageable pageable, String search, ProductFilterRequest filterRequest);
 
-	public String updateEmailOnlyProduct(Integer id, String newEmail);
+	public String updateProducNameOnlyProduct(Integer id, String newEmail);
 
 	public int createProductDetail(int prductId, CreateProductDetailRequest request);
 

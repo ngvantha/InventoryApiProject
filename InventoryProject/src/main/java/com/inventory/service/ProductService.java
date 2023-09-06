@@ -1,6 +1,8 @@
 package com.inventory.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -12,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.inventory.config.GlobalExceptionHandler.ApiMessageResponse;
 import com.inventory.config.GlobalExceptionHandler.NotFoundException;
 import com.inventory.db1.entities.Product;
 import com.inventory.db1.entities.ProductDetail;
@@ -130,14 +133,17 @@ public class ProductService implements IProductService {
 
 	@Override
 	public int deleteProduct(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
+		Product product = productRepository.findById(id).get();
+		productRepository.delete(product);
+		return product.getId();
 	}
 
 	@Override
 	public int deleteProductWithStatus(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
+		Product product = productRepository.findById(id).get();
+		product.setIsStatus(false);
+		productRepository.save(product);
+		return product.getId();
 	}
 
 	@Override
@@ -154,14 +160,12 @@ public class ProductService implements IProductService {
 
 	@Override
 	public boolean isProductExistsByID(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		return productRepository.existsById(id);
 	}
 
 	@Override
 	public boolean isProductExistsByProductName(String ProductName) {
-		// TODO Auto-generated method stub
-		return false;
+		return productRepository.existsByProductName(ProductName);
 	}
 
 	@Override
@@ -176,9 +180,11 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
-	public String updateEmailOnlyProduct(Integer id, String newEmail) {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateProducNameOnlyProduct(Integer id, String newProductName) {
+		Product product = productRepository.findById(id).get();
+		product.setProductName(newProductName);
+		productRepository.save(product);
+		return product.getProductName();
 	}
 
 	@Override
@@ -337,7 +343,12 @@ public class ProductService implements IProductService {
 	
 	@Override
 	public ProductDetailResponse updateProductDetail(UpdateProductDetailRequest request) {
-		ProductDetail productDetail = modelMapper.map(request, ProductDetail.class);
+		//ProductDetail productDetail = modelMapper.map(request, ProductDetail.class);
+		ProductDetail productDetail =  productDetailRepository.findById(request.getId()).get();
+		productDetail.setIsStatus(request.getIsStatus());
+		productDetail.setProductCode(request.getProductCode());
+		productDetail.setProductDetailDescription(request.getProductDetailDescription());
+		
 		var productDetailResult = productDetailRepository.save(productDetail);
 		ProductDetailResponse result = modelMapper.map(productDetailResult, ProductDetailResponse.class);
 		return result;
@@ -345,7 +356,13 @@ public class ProductService implements IProductService {
 
 	@Override
 	public ProductDetailUnitResponse updateProductDetailUnit(UpdateProductDetailUnitRequest request) {
-		ProductDetailUnit productDetailUnit = modelMapper.map(request, ProductDetailUnit.class);
+		ProductDetailUnit productDetailUnit = productDetailUnitRepository.findById(request.getId()).get();
+		productDetailUnit.setIsMain(request.getIsMain());
+		productDetailUnit.setIsStatus(request.getIsStatus());
+		productDetailUnit.setRatioToUnit(request.getRatioToUnit());
+//		productDetailUnit.setRatioType(request.getRatioType());
+		productDetailUnit.setUnit(modelMapper.map(request.getUnit(), Unit.class));
+		
 		var productDetailUnitResult = productDetailUnitRepository.save(productDetailUnit);
 		ProductDetailUnitResponse result = modelMapper.map(productDetailUnitResult, ProductDetailUnitResponse.class);
 		return result;
@@ -353,10 +370,22 @@ public class ProductService implements IProductService {
 
 	@Override
 	public ProductDetailUnitInventoryResponse updateProductDetailUnitInventory(UpdateProductDetailUnitInventoryRequest request) {
-		ProductDetailUnitInventory productDetailUnitInventory = modelMapper.map(request, ProductDetailUnitInventory.class);
+		ProductDetailUnitInventory productDetailUnitInventory = productDetailUnitInventoryRepository.findById(request.getId()).get();
+		productDetailUnitInventory.setInputDate(request.getInputDate());
+		productDetailUnitInventory.setInputQuantity(request.getInputQuantity());
+		productDetailUnitInventory.setInventoryQuantity(request.getInventoryQuantity());
+		productDetailUnitInventory.setIsStatus(request.getIsStatus());
+		productDetailUnitInventory.setProductDetailBarcode(request.getProductDetailBarcode());
+		productDetailUnitInventory.setRetailPrice(request.getRetailPrice());
+		productDetailUnitInventory.setSalePrice(request.getSalePrice());
+		productDetailUnitInventory.setUnitPrice(request.getUnitPrice());
+		productDetailUnitInventory.setWholesalePrice(request.getWholesalePrice());
+		
 		var productDetailUnitInventoryResult = productDetailUnitInventoryRepository.save(productDetailUnitInventory);
 		ProductDetailUnitInventoryResponse result = modelMapper.map(productDetailUnitInventoryResult, ProductDetailUnitInventoryResponse.class);
 		return result;
 	}
+	
+	
 
 }

@@ -10,7 +10,7 @@ import com.inventory.db1.repositories.IProductDetailUnitInventoryRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class ProductDetailUnitInventoryIdExistsValidator implements ConstraintValidator<ProductIdExists, Integer>{
+public class ProductDetailUnitInventoryIdExistsValidator implements ConstraintValidator<ProductDetailUnitInventoryIdExists, Integer>{
 	@Autowired
 	private IProductDetailUnitInventoryRepository repository;
 
