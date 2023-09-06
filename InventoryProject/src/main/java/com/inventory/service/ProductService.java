@@ -14,8 +14,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.inventory.config.GlobalExceptionHandler.ApiMessageResponse;
-import com.inventory.config.GlobalExceptionHandler.NotFoundException;
 import com.inventory.db1.entities.Product;
 import com.inventory.db1.entities.ProductDetail;
 import com.inventory.db1.entities.ProductDetailUnit;

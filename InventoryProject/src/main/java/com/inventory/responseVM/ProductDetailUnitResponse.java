@@ -15,11 +15,11 @@ public class ProductDetailUnitResponse {
 
 	private Boolean isMain;
 
-	private Integer conversionratio;
+	private Double conversionratio;
 
 	private RatioType ratioType;
 
-	private Double ratioToUnit;
+	private Integer ratioToUnit;
 
 	private Boolean isStatus;
 
