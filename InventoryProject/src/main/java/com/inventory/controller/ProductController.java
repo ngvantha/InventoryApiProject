@@ -23,6 +23,9 @@ import com.inventory.requestVM.ProductRequest.CreateProductDetailUnitInventoryRe
 import com.inventory.requestVM.ProductRequest.CreateProductDetailUnitRequest;
 import com.inventory.requestVM.ProductRequest.CreateProductRequest;
 import com.inventory.requestVM.ProductRequest.ProductFilterRequest;
+import com.inventory.requestVM.ProductRequest.UpdateProductDetailRequest;
+import com.inventory.requestVM.ProductRequest.UpdateProductDetailUnitInventoryRequest;
+import com.inventory.requestVM.ProductRequest.UpdateProductDetailUnitRequest;
 import com.inventory.requestVM.ProductRequest.UpdateProductRequest;
 import com.inventory.responseVM.ProductDetailResponse;
 import com.inventory.responseVM.ProductDetailUnitInventoryResponse;
@@ -146,5 +149,29 @@ public class ProductController {
 		log.info(result);
 		return ResponseEntity.ok(result);
 	}
-
+	
+	@PutMapping("/productdetails")
+	public ResponseEntity<?> UpdateProductDetail(@RequestBody @Valid UpdateProductDetailRequest request) {
+		log.info(request);
+		var result = service.updateProductDetail(request);
+		log.info(result);
+		return ResponseEntity.ok(result);
+	}
+	
+	@PutMapping("/productdetails/productDetailUnits")
+	public ResponseEntity<?> UpdateProductDetailUnit(@RequestBody @Valid UpdateProductDetailUnitRequest request) {
+		log.info(request);
+		var result = service.updateProductDetailUnit(request);
+		log.info(result);
+		return ResponseEntity.ok(result);
+	}
+	
+	@PutMapping("/productdetails/productDetailUnits/productDetailUnitInventories")
+	public ResponseEntity<?> UpdateProductDetailUnitInventory(@RequestBody @Valid UpdateProductDetailUnitInventoryRequest request) {
+		log.info(request);
+		var result = service.updateProductDetailUnitInventory(request);
+		log.info(result);
+		return ResponseEntity.ok(result);
+	}
+	
 }

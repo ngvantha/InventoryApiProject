@@ -18,7 +18,7 @@ import com.inventory.db1.entities.ProductDetail;
 import com.inventory.db1.entities.ProductDetailUnit;
 import com.inventory.db1.entities.ProductDetailUnitInventory;
 import com.inventory.db1.entities.Unit;
-import com.inventory.db1.repositories.IProductDetaiUnitInventoryRepository;
+import com.inventory.db1.repositories.IProductDetailUnitInventoryRepository;
 import com.inventory.db1.repositories.IProductDetailRepository;
 import com.inventory.db1.repositories.IProductDetailUnitRepository;
 import com.inventory.db1.repositories.IProductRepository;
@@ -31,6 +31,9 @@ import com.inventory.requestVM.ProductRequest.ProductDetailUnitRequest;
 import com.inventory.requestVM.ProductRequest.ProductFilterRequest;
 import com.inventory.requestVM.ProductRequest.ProductRequest;
 import com.inventory.requestVM.ProductRequest.UnitRequest;
+import com.inventory.requestVM.ProductRequest.UpdateProductDetailRequest;
+import com.inventory.requestVM.ProductRequest.UpdateProductDetailUnitInventoryRequest;
+import com.inventory.requestVM.ProductRequest.UpdateProductDetailUnitRequest;
 import com.inventory.requestVM.ProductRequest.UpdateProductRequest;
 import com.inventory.responseVM.ProductDetailResponse;
 import com.inventory.responseVM.ProductDetailUnitInventoryResponse;
@@ -55,7 +58,7 @@ public class ProductService implements IProductService {
 	private IProductDetailUnitRepository productDetailUnitRepository;
 
 	@Autowired
-	private IProductDetaiUnitInventoryRepository productDetailUnitInventoryRepository;
+	private IProductDetailUnitInventoryRepository productDetailUnitInventoryRepository;
 
 	@Override
 	public ProductResponse getProductByID(Integer id) {
@@ -332,6 +335,28 @@ public class ProductService implements IProductService {
 		return result;
 	}
 	
-	
+	@Override
+	public ProductDetailResponse updateProductDetail(UpdateProductDetailRequest request) {
+		ProductDetail productDetail = modelMapper.map(request, ProductDetail.class);
+		var productDetailResult = productDetailRepository.save(productDetail);
+		ProductDetailResponse result = modelMapper.map(productDetailResult, ProductDetailResponse.class);
+		return result;
+	}
+
+	@Override
+	public ProductDetailUnitResponse updateProductDetailUnit(UpdateProductDetailUnitRequest request) {
+		ProductDetailUnit productDetailUnit = modelMapper.map(request, ProductDetailUnit.class);
+		var productDetailUnitResult = productDetailUnitRepository.save(productDetailUnit);
+		ProductDetailUnitResponse result = modelMapper.map(productDetailUnitResult, ProductDetailUnitResponse.class);
+		return result;
+	}
+
+	@Override
+	public ProductDetailUnitInventoryResponse updateProductDetailUnitInventory(UpdateProductDetailUnitInventoryRequest request) {
+		ProductDetailUnitInventory productDetailUnitInventory = modelMapper.map(request, ProductDetailUnitInventory.class);
+		var productDetailUnitInventoryResult = productDetailUnitInventoryRepository.save(productDetailUnitInventory);
+		ProductDetailUnitInventoryResponse result = modelMapper.map(productDetailUnitInventoryResult, ProductDetailUnitInventoryResponse.class);
+		return result;
+	}
 
 }

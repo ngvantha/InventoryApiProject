@@ -11,6 +11,9 @@ import com.inventory.requestVM.ProductRequest.CreateProductDetailUnitInventoryRe
 import com.inventory.requestVM.ProductRequest.CreateProductDetailUnitRequest;
 import com.inventory.requestVM.ProductRequest.CreateProductRequest;
 import com.inventory.requestVM.ProductRequest.ProductFilterRequest;
+import com.inventory.requestVM.ProductRequest.UpdateProductDetailRequest;
+import com.inventory.requestVM.ProductRequest.UpdateProductDetailUnitInventoryRequest;
+import com.inventory.requestVM.ProductRequest.UpdateProductDetailUnitRequest;
 import com.inventory.requestVM.ProductRequest.UpdateProductRequest;
 import com.inventory.responseVM.ProductDetailResponse;
 import com.inventory.responseVM.ProductDetailUnitInventoryResponse;
@@ -64,5 +67,11 @@ public interface IProductService {
 	public ProductDetailUnitResponse getProductDetailUnitById(Integer productDetailUnitId);
 	
 	public ProductDetailUnitInventoryResponse getProductDetailUnitInventoryById(Integer productDetailUnitInventoryId);
+	
+	public ProductDetailResponse updateProductDetail(UpdateProductDetailRequest request);
+	
+	public ProductDetailUnitResponse updateProductDetailUnit(UpdateProductDetailUnitRequest request);
+	
+	public ProductDetailUnitInventoryResponse updateProductDetailUnitInventory(UpdateProductDetailUnitInventoryRequest request);
 
 }
