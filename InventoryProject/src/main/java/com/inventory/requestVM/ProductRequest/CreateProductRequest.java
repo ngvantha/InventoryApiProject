@@ -2,6 +2,8 @@ package com.inventory.requestVM.ProductRequest;
 
 import java.util.List;
 
+import com.inventory.validation.Product.ProductNameExists;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class CreateProductRequest {
 	private Integer id;
 
+	@ProductNameExists(message = "Product name exist already!")
 	private String productName;
 	
 	private Integer viewCount;

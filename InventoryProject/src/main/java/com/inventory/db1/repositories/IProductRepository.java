@@ -7,4 +7,6 @@ import com.inventory.db1.entities.Product;
 
 public interface IProductRepository extends JpaRepository<Product, Integer> , JpaSpecificationExecutor<Product>{
 
+	public boolean existsByProductName(String name);
+
 }
