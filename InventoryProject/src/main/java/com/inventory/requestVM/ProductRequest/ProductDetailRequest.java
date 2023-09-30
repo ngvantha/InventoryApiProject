@@ -1,14 +1,14 @@
-package com.inventory.responseVM;
+package com.inventory.requestVM.ProductRequest;
 
 import java.util.List;
+
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ProductDetailResponse {
-	
+public class ProductDetailRequest {
 	private Integer id;
 	
 	private String productCode;
@@ -17,7 +17,8 @@ public class ProductDetailResponse {
 	
 	private String productDetailDescription;
 	
-	//private Product product;
-	//@JsonIgnore
-	private List<ProductDetailUnitResponse> productDetailUnits;
+	//private CreateProductRequest product;
+	
+	//private List<CreateProductDetailUnitRequest> productDetailUnits;
+
 }

@@ -2,6 +2,7 @@ package com.inventory.config.GlobalExceptionHandler;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.modelmapper.MappingException;
 import org.modelmapper.spi.ErrorMessage;
@@ -49,7 +50,7 @@ public class ResponseEntityException {
 
 	// Default exception
 	@ExceptionHandler({ Exception.class })
-	public ResponseEntity<Object> handleAll(Exception exception) {
+	public ResponseEntity<?> handleAll(Exception exception) {
 
 		String message = getMessage("Exception.message");
 		String detailMessage = exception.getLocalizedMessage();
@@ -64,7 +65,7 @@ public class ResponseEntityException {
 	// Not found url handler
 	// @Override
 	@ExceptionHandler(NoHandlerFoundException.class)
-	protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException exception,
+	protected ResponseEntity<?> handleNoHandlerFoundException(NoHandlerFoundException exception,
 			HttpServletRequest request) {
 		// exceptionService.errorLog(e, request);
 		String message = getMessage("NoHandlerFoundException.message") + exception.getHttpMethod() + " "
@@ -79,7 +80,7 @@ public class ResponseEntityException {
 
 	// Not support HTTP Method
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-	protected ResponseEntity<Object> handleHttpRequestMethodNotSupportedException(
+	protected ResponseEntity<?> handleHttpRequestMethodNotSupportedException(
 			HttpRequestMethodNotSupportedException exception, HttpServletRequest request) {
 		// exceptionService.errorLog(e, request);
 		String message = getMessageFromHttpRequestMethodNotSupportedException(exception);
@@ -102,7 +103,7 @@ public class ResponseEntityException {
 
 	// Not support media type
 	@ExceptionHandler({ HttpMediaTypeNotSupportedException.class })
-	protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException exception,
+	protected ResponseEntity<?> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException exception,
 			HttpServletRequest request) {
 
 		String message = getMessageFromHttpMediaTypeNotSupportedException(exception);
@@ -127,7 +128,7 @@ public class ResponseEntityException {
 	// MethodArgumentNotValidException: This exception is thrown when argument
 	// annotated with @Valid failed validation:
 	@ExceptionHandler({ MethodArgumentNotValidException.class })
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
+	protected ResponseEntity<?> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
 			HttpServletRequest request) {
 
 		String message = getMessage("MethodArgumentNotValidException.message");
@@ -157,7 +158,7 @@ public class ResponseEntityException {
 	// Giá trị trường không nằm trong phạm vi cho phép (@Min, @Max). V.v.
 	@SuppressWarnings("rawtypes")
 	@ExceptionHandler(ConstraintViolationException.class)
-	public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException exception) {
+	public ResponseEntity<?> handleConstraintViolationException(ConstraintViolationException exception) {
 
 		String message = getMessage("MethodArgumentNotValidException.message");
 		String detailMessage = exception.getLocalizedMessage();
@@ -182,7 +183,7 @@ public class ResponseEntityException {
 	// request missing parameter:
 	// Missing parameter on request(url) when send
 	@ExceptionHandler({ MissingServletRequestParameterException.class })
-	protected ResponseEntity<Object> handleMissingServletRequestParameter(
+	protected ResponseEntity<?> handleMissingServletRequestParameter(
 			MissingServletRequestParameterException exception, HttpServletRequest request) {
 
 		String message = exception.getParameterName() + " "
@@ -202,7 +203,7 @@ public class ResponseEntityException {
 	// argument is not the expected type:
 	// wrong type parameter
 	@ExceptionHandler({ MethodArgumentTypeMismatchException.class })
-	public ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException exception) {
+	public ResponseEntity<?> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException exception) {
 
 		String message = exception.getName() + " " + getMessage("MethodArgumentTypeMismatchException.message")
 				+ exception.getRequiredType().getName();
@@ -216,7 +217,7 @@ public class ResponseEntityException {
 	}
 
 	@ExceptionHandler({ DataIntegrityViolationException.class })
-	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
+	public ResponseEntity<?> handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
 
 		String message = "DataIntegrityViolationException Message";
 		String detailMessage = exception.getLocalizedMessage();
@@ -228,7 +229,7 @@ public class ResponseEntityException {
 	}
 	
 	@ExceptionHandler({ MappingException.class })
-	public ResponseEntity<Object> handleMappingException(MappingException exception) {
+	public ResponseEntity<?> handleMappingException(MappingException exception) {
 
 		String message = getMessageFromMappingException(exception);
 		String detailMessage = exception.getLocalizedMessage();
@@ -245,6 +246,17 @@ public class ResponseEntityException {
 			message += method + ", ";
 		}
 		return message.substring(0, message.length() - 2);
+	}
+	
+	@ExceptionHandler({ NoSuchElementException.class })
+	public ResponseEntity<?> handleNoSuchElementException(NoSuchElementException exception) {
+		String message = "Error Not Found!!!";
+		String detailMessage = exception.getLocalizedMessage();
+		int code = 10;
+		String moreInformation = "http://localhost:8080/api/v1/exception/10";
+		log.error(message, detailMessage, exception);
+		ApiMessageResponse response = new ApiMessageResponse(message, detailMessage, null, code, moreInformation);
+		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
 
 }

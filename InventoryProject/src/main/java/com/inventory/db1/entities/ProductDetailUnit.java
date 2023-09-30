@@ -3,10 +3,16 @@ package com.inventory.db1.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
-@Table(name = "PRODUCT_DETAIL_UNITS", catalog = "WAREHOUSE")
+@Table(name = "PRODUCT_DETAIL_UNITS")
 @NoArgsConstructor
 @Data
 public class ProductDetailUnit implements Serializable {
@@ -47,21 +53,21 @@ public class ProductDetailUnit implements Serializable {
 
 	@Column(name = "RATIO_TO_UNIT")
 	@NonNull
-	private Boolean ratioToUnit;
+	private Integer ratioToUnit;
 
 	@Column(name = "IS_STATUS", columnDefinition = "boolean default true")
 	@NonNull
 	private Boolean isStatus;
 
-	@ManyToOne
-	@JoinColumn(name = "PRODUCT_DETAIL_ID")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "PRODUCT_DETAIL_ID", nullable = false)
 	private ProductDetail productDetail;
 
-	@ManyToOne
-	@JoinColumn(name = "UNIT_ID")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "UNIT_ID", nullable = false)
 	private Unit Unit;
 
-	@OneToMany(mappedBy = "productDetailUnit")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "productDetailUnit", fetch = FetchType.LAZY)
 	private List<ProductDetailUnitInventory> productDetailUnitInventories;
 
 	public enum RatioType {
