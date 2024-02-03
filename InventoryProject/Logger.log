@@ -1,43 +1,37 @@
-2023-08-27 18:18:22 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils       - Could not detect default configuration classes for test class [com.inventory.InventoryProjectApplicationTests]: InventoryProjectApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration. 
-2023-08-27 18:18:22 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper        - Found @SpringBootConfiguration com.inventory.InventoryProjectApplication for test class com.inventory.InventoryProjectApplicationTests 
-2023-08-27 18:18:23 [background-preinit] INFO  o.h.v.i.u.Version                                  - HV000001: Hibernate Validator 8.0.1.Final 
-2023-08-27 18:18:23 [main] INFO  c.i.InventoryProjectApplicationTests               - Starting InventoryProjectApplicationTests using Java 17.0.2 with PID 12704 (started by nguyentha in D:\GIT\InventoryProject\InventoryProject) 
-2023-08-27 18:18:23 [main] INFO  c.i.InventoryProjectApplicationTests               - No active profile set, falling back to 1 default profile: "default" 
-2023-08-27 18:18:24 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
-2023-08-27 18:18:25 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 52 ms. Found 5 JPA repository interfaces. 
-2023-08-27 18:18:25 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
-2023-08-27 18:18:25 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 10 ms. Found 2 JPA repository interfaces. 
-2023-08-27 18:18:26 [main] INFO  o.h.j.i.u.LogHelper                                - HHH000204: Processing PersistenceUnitInfo [name: mysqlUnit] 
-2023-08-27 18:18:26 [main] INFO  o.h.Version                                        - HHH000412: Hibernate ORM core version 6.2.6.Final 
-2023-08-27 18:18:26 [main] INFO  o.h.c.Environment                                  - HHH000406: Using bytecode reflection optimizer 
-2023-08-27 18:18:26 [main] INFO  o.h.b.i.BytecodeProviderInitiator                  - HHH000021: Bytecode provider name : bytebuddy 
-2023-08-27 18:18:26 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer 
-2023-08-27 18:18:26 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Starting... 
-2023-08-27 18:18:27 [main] INFO  c.z.h.p.HikariPool                                 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2d4a0671 
-2023-08-27 18:18:27 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Start completed. 
-2023-08-27 18:18:28 [main] INFO  o.h.b.i.BytecodeProviderInitiator                  - HHH000021: Bytecode provider name : bytebuddy 
-2023-08-27 18:18:29 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
-2023-08-27 18:18:29 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'mysqlUnit' 
-2023-08-27 18:18:29 [main] INFO  o.h.j.i.u.LogHelper                                - HHH000204: Processing PersistenceUnitInfo [name: sqlServerUnit] 
-2023-08-27 18:18:29 [main] INFO  o.h.b.i.BytecodeProviderInitiator                  - HHH000021: Bytecode provider name : bytebuddy 
-2023-08-27 18:18:29 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer 
-2023-08-27 18:18:29 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-2 - Starting... 
-2023-08-27 18:18:29 [main] INFO  c.z.h.p.HikariPool                                 - HikariPool-2 - Added connection ConnectionID:1 ClientConnectionId: 53a2125f-d724-4933-ba57-6cc27282c649 
-2023-08-27 18:18:29 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-2 - Start completed. 
-2023-08-27 18:18:29 [main] INFO  o.h.b.i.BytecodeProviderInitiator                  - HHH000021: Bytecode provider name : bytebuddy 
-2023-08-27 18:18:29 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
-2023-08-27 18:18:29 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'sqlServerUnit' 
-2023-08-27 18:18:31 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration    - 
-
-Using generated security password: af7c75fd-12e7-41e6-84dc-0a15de2040f5
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
- 
-2023-08-27 18:18:31 [main] INFO  o.s.s.w.DefaultSecurityFilterChain                 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@76140ca5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@47b5c247, org.springframework.security.web.context.SecurityContextHolderFilter@5d96b0f, org.springframework.security.web.header.HeaderWriterFilter@2bfe398b, org.springframework.security.web.csrf.CsrfFilter@19cc697c, org.springframework.security.web.authentication.logout.LogoutFilter@6deb2b19, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@414d5660, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4a609803, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4057eb76, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@b9750f0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a592d22, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3bde85b0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4ac64dc2, org.springframework.security.web.access.ExceptionTranslationFilter@1dc37d4f, org.springframework.security.web.access.intercept.AuthorizationFilter@31b11287] 
-2023-08-27 18:18:31 [main] INFO  c.i.InventoryProjectApplicationTests               - Started InventoryProjectApplicationTests in 8.949 seconds (process running for 10.878) 
-2023-08-27 18:18:32 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Closing JPA EntityManagerFactory for persistence unit 'sqlServerUnit' 
-2023-08-27 18:18:32 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource                             - HikariPool-2 - Shutdown initiated... 
-2023-08-27 18:18:32 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource                             - HikariPool-2 - Shutdown completed. 
-2023-08-27 18:18:32 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Closing JPA EntityManagerFactory for persistence unit 'mysqlUnit' 
-2023-08-27 18:18:32 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Shutdown initiated... 
-2023-08-27 18:18:32 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Shutdown completed. 
+2024-02-03 18:53:16 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils       - Could not detect default configuration classes for test class [com.baydep.inventory.InventoryProjectApplicationTests]: InventoryProjectApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration. 
+2024-02-03 18:53:16 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper        - Found @SpringBootConfiguration com.baydep.inventory.InventoryProjectApplication for test class com.baydep.inventory.InventoryProjectApplicationTests 
+2024-02-03 18:53:17 [background-preinit] INFO  o.h.v.i.u.Version                                  - HV000001: Hibernate Validator 8.0.1.Final 
+2024-02-03 18:53:17 [main] INFO  c.b.i.InventoryProjectApplicationTests             - Starting InventoryProjectApplicationTests using Java 17.0.2 with PID 12900 (started by nguyentha in D:\GIT\InventoryApiProject\InventoryProject) 
+2024-02-03 18:53:17 [main] INFO  c.b.i.InventoryProjectApplicationTests             - The following 1 profile is active: "dev" 
+2024-02-03 18:53:19 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2024-02-03 18:53:19 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 62 ms. Found 5 JPA repository interfaces. 
+2024-02-03 18:53:19 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2024-02-03 18:53:19 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 11 ms. Found 2 JPA repository interfaces. 
+2024-02-03 18:53:20 [main] INFO  o.h.j.i.u.LogHelper                                - HHH000204: Processing PersistenceUnitInfo [name: mysqlUnit] 
+2024-02-03 18:53:20 [main] INFO  o.h.Version                                        - HHH000412: Hibernate ORM core version 6.2.6.Final 
+2024-02-03 18:53:20 [main] INFO  o.h.c.Environment                                  - HHH000406: Using bytecode reflection optimizer 
+2024-02-03 18:53:20 [main] INFO  o.h.b.i.BytecodeProviderInitiator                  - HHH000021: Bytecode provider name : bytebuddy 
+2024-02-03 18:53:20 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer 
+2024-02-03 18:53:20 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Starting... 
+2024-02-03 18:53:21 [main] INFO  c.z.h.p.HikariPool                                 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@41f90b10 
+2024-02-03 18:53:21 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Start completed. 
+2024-02-03 18:53:21 [main] INFO  o.h.b.i.BytecodeProviderInitiator                  - HHH000021: Bytecode provider name : bytebuddy 
+2024-02-03 18:53:23 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+2024-02-03 18:53:23 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'mysqlUnit' 
+2024-02-03 18:53:23 [main] INFO  o.h.j.i.u.LogHelper                                - HHH000204: Processing PersistenceUnitInfo [name: sqlServerUnit] 
+2024-02-03 18:53:23 [main] INFO  o.h.b.i.BytecodeProviderInitiator                  - HHH000021: Bytecode provider name : bytebuddy 
+2024-02-03 18:53:23 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer 
+2024-02-03 18:53:23 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-2 - Starting... 
+2024-02-03 18:53:23 [main] INFO  c.z.h.p.HikariPool                                 - HikariPool-2 - Added connection ConnectionID:1 ClientConnectionId: ff81954a-441d-4886-9ff7-22fab27d103d 
+2024-02-03 18:53:23 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-2 - Start completed. 
+2024-02-03 18:53:23 [main] INFO  o.h.b.i.BytecodeProviderInitiator                  - HHH000021: Bytecode provider name : bytebuddy 
+2024-02-03 18:53:23 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+2024-02-03 18:53:23 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'sqlServerUnit' 
+2024-02-03 18:53:24 [main] INFO  o.s.s.w.DefaultSecurityFilterChain                 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6461c673, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1e11d73c, org.springframework.security.web.context.SecurityContextHolderFilter@64abb917, org.springframework.security.web.header.HeaderWriterFilter@68d1f4e2, org.springframework.security.web.authentication.logout.LogoutFilter@6f999cf4, com.baydep.inventory.config.JWT.AuthTokenFilter@3152d449, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@68596992, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2c2dfde3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@62a09668, org.springframework.security.web.session.SessionManagementFilter@2d036335, org.springframework.security.web.access.ExceptionTranslationFilter@558fa64a, org.springframework.security.web.access.intercept.AuthorizationFilter@5b3427c4] 
+2024-02-03 18:53:25 [main] INFO  c.b.i.InventoryProjectApplicationTests             - Started InventoryProjectApplicationTests in 8.716 seconds (process running for 10.733) 
+2024-02-03 18:53:26 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Closing JPA EntityManagerFactory for persistence unit 'sqlServerUnit' 
+2024-02-03 18:53:26 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource                             - HikariPool-2 - Shutdown initiated... 
+2024-02-03 18:53:26 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource                             - HikariPool-2 - Shutdown completed. 
+2024-02-03 18:53:26 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Closing JPA EntityManagerFactory for persistence unit 'mysqlUnit' 
+2024-02-03 18:53:26 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Shutdown initiated... 
+2024-02-03 18:53:26 [SpringApplicationShutdownHook] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Shutdown completed. 

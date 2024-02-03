@@ -9,10 +9,11 @@
 		<version>3.1.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.inventory</groupId>
+	<groupId>com.baydep.inventory</groupId>
 	<artifactId>InventoryProject</artifactId>
-	<version>1.0.0.0.001</version>
+	<version>1.0.0.001</version>
 	<name>InventoryProject</name>
+	<packaging>war</packaging>
 	<description>inventory project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
@@ -124,6 +125,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -133,10 +140,10 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<!-- Config profile -->
 				<configuration>
-				<profiles>dev</profiles>
-				<profiles>test</profiles>
-				<profiles>staging</profiles>
-				<profiles>prod</profiles>
+					<profiles>dev</profiles>
+					<profiles>test</profiles>
+					<profiles>staging</profiles>
+					<profiles>prod</profiles>
 				</configuration>
 			</plugin>
 		</plugins>
