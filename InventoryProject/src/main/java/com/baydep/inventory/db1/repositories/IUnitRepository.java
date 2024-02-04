@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import com.baydep.inventory.db1.entities.Unit;
 
-@Repository
 public interface IUnitRepository extends JpaRepository<Unit, Integer>, JpaSpecificationExecutor<Unit> {
 
 	public Unit findByName(String name);

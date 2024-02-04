@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import com.baydep.inventory.db1.entities.Product;
 
-@Repository
 public interface IProductRepository extends JpaRepository<Product, Integer> , JpaSpecificationExecutor<Product>{
 
 	public boolean existsByProductName(String name);

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.baydep.inventory.db2.entities.AppUser;
 
-@Repository
 public interface IAppUserRepository extends JpaRepository<AppUser, UUID>, JpaSpecificationExecutor<AppUser> {
 	public AppUser findByUserName(String name);
 	

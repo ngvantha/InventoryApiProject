@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.baydep.inventory.db1.entities.ProductDetail;
 
-@Repository
 public interface IProductDetailRepository extends JpaRepository<ProductDetail, Integer>{
 
 }

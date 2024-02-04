@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.baydep.inventory.db2.entities.AppRole;
 
-@Repository
 public interface IAppRoleRepository extends JpaRepository<AppRole, UUID>,  JpaSpecificationExecutor<AppRole>  {
 
 	public AppRole findByName(String name);
